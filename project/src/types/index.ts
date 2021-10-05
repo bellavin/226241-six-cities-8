@@ -2,15 +2,15 @@ export type User = {
   img: string,
   name: string,
   isPro?: boolean
-}
+};
 
 export type Review = {
   id: number,
   stars: number,
   text: string,
-  // date: Date,
+  date: string | number,
   user: User,
-}
+};
 
 export type CityPlaceDetailDesc = {
   bedrooms: number,
@@ -20,7 +20,7 @@ export type CityPlaceDetailDesc = {
   user: User,
   text: string[],
   reviews: Review[],
-}
+};
 
 export type CityPlaceDetail = {
   id: number,
@@ -33,7 +33,7 @@ export type CityPlaceDetail = {
   isPremium?: boolean,
   desc: CityPlaceDetailDesc,
   near: CityPlace[],
-}
+};
 
 export type CityPlace = {
   id: number,
@@ -44,10 +44,10 @@ export type CityPlace = {
   type: string,
   isFeature?: boolean,
   isPremium?: boolean,
-}
+};
 
 export type City = {
   id: number,
   name: string,
   places: CityPlace[],
-}
+};

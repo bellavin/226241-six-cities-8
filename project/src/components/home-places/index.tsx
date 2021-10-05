@@ -12,16 +12,17 @@ function HomePlaces({data, children}:Props): JSX.Element {
 
       <div className="cities__places-list places__list tabs__content">
         {data.map((item) => {
-          const featureClassName = item.isFeature ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
+          const featureClassName = item.isFeature ? ' place-card__bookmark-button--active' : '';
+          const stars = `${Math.floor(item.stars) * 20}%`;
 
           return (
             <article key={item.id} className="cities__place-card place-card">
               {
-                item.isPremium
-                &&
-                <div className="place-card__mark">
-                  <span>Premium</span>
-                </div>
+                item.isPremium && (
+                  <div className="place-card__mark">
+                    <span>Premium</span>
+                  </div>
+                )
               }
               <div className="cities__image-wrapper place-card__image-wrapper">
                 <a href="#">
@@ -34,7 +35,7 @@ function HomePlaces({data, children}:Props): JSX.Element {
                     <b className="place-card__price-value">&euro;{item.price}</b>
                     <span className="place-card__price-text">&#47;&nbsp;night</span>
                   </div>
-                  <button className={featureClassName} type="button">
+                  <button className={`place-card__bookmark-button button${featureClassName}`} type="button">
                     <svg className="place-card__bookmark-icon" width="18" height="19">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -43,7 +44,7 @@ function HomePlaces({data, children}:Props): JSX.Element {
                 </div>
                 <div className="place-card__rating rating">
                   <div className="place-card__stars rating__stars">
-                    <span style={{width: '80%'}}></span>
+                    <span style={{width: stars}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                 </div>

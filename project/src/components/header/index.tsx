@@ -16,9 +16,9 @@ function Header({authorized = false, hasNavigation = false}:props): JSX.Element 
             </a>
           </div>
           {
-            hasNavigation
-            &&
-            <HeaderNav authorized={authorized} />
+            hasNavigation && (
+              <HeaderNav authorized={authorized} />
+            )
           }
         </div>
       </div>

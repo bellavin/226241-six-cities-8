@@ -20,10 +20,11 @@ function Home({data, children}:Props): JSX.Element {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               {data.map((item, i) => {
-                const className = (i === activeIndex) ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
+                const activeClassName = (i === activeIndex) ? ' tabs__item--active' : '';
+
                 return(
                   <li key={item.id} className="locations__item">
-                    <a className={className} href="#">
+                    <a className={`locations__item-link tabs__item${activeClassName}`} href="#">
                       <span>{item.name}</span>
                     </a>
                   </li>

@@ -5,6 +5,8 @@ type Props = {
 }
 
 function FavoritesCityPlace({data}:Props): JSX.Element {
+  const stars = `${Math.floor(data.stars) * 20}%`;
+
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -27,7 +29,7 @@ function FavoritesCityPlace({data}:Props): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '100%'}}></span>
+            <span style={{width: stars}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

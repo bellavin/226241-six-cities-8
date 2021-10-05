@@ -5,23 +5,24 @@ type Props = {
 }
 
 function PropertyDesc({data}:Props): JSX.Element {
-  const bookmarkClassName = data.isFeature ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button';
-  const userClassName = data.desc.user.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper';
+  const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
+  const userProClassName = data.desc.user.isPro ? ' property__avatar-wrapper--pro' : '';
+  const stars = `${Math.floor(data.stars) * 20}%`;
 
   return (
     <>
       {
-        data.isPremium
-        &&
-        <div className="property__mark">
-          <span>Premium</span>
-        </div>
+        data.isPremium && (
+          <div className="property__mark">
+            <span>Premium</span>
+          </div>
+        )
       }
       <div className="property__name-wrapper">
         <h1 className="property__name">
           {data.name}
         </h1>
-        <button className={bookmarkClassName} type="button">
+        <button className={`property__bookmark-button button${featureClassName}`} type="button">
           <svg className="property__bookmark-icon" width="31" height="33">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
@@ -30,7 +31,7 @@ function PropertyDesc({data}:Props): JSX.Element {
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{width: '80%'}}></span>
+          <span style={{width: stars}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="property__rating-value rating__value">{data.stars}</span>
@@ -63,18 +64,18 @@ function PropertyDesc({data}:Props): JSX.Element {
       <div className="property__host">
         <h2 className="property__host-title">{data.desc.title}</h2>
         <div className="property__host-user user">
-          <div className={userClassName}>
+          <div className={`property__avatar-wrapper user__avatar-wrapper${userProClassName}`}>
             <img className="property__avatar user__avatar" src={data.desc.user.img} width="74" height="74" alt="Host avatar" />
           </div>
           <span className="property__user-name">
             {data.desc.user.name}
           </span>
           {
-            data.desc.user.isPro
-            &&
-            <span className="property__user-status">
-              Pro
-            </span>
+            data.desc.user.isPro && (
+              <span className="property__user-status">
+                Pro
+              </span>
+            )
           }
         </div>
         <div className="property__description">

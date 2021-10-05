@@ -11,22 +11,22 @@ function HeaderNav({authorized}:props): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             {
-              authorized
-                ?
+              authorized ? (
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                :
+              ) : (
                 <span className="header__login">Sign in</span>
+              )
             }
           </a>
         </li>
         {
-          authorized
-          &&
-          <li className="header__nav-item">
-            <a className="header__nav-link" href="#">
-              <span className="header__signout">Sign out</span>
-            </a>
-          </li>
+          authorized && (
+            <li className="header__nav-item">
+              <a className="header__nav-link" href="#">
+                <span className="header__signout">Sign out</span>
+              </a>
+            </li>
+          )
         }
       </ul>
     </nav>
