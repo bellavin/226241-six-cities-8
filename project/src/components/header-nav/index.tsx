@@ -1,8 +1,13 @@
+import { AuthStatus } from '../../const';
+
 type props = {
-  authorized?:boolean,
+  authStatus:AuthStatus,
 }
 
-function HeaderNav({authorized}:props): JSX.Element {
+function HeaderNav({authStatus}:props): JSX.Element {
+  const authorized = authStatus === AuthStatus.Auth;
+  const notAuthorized = authStatus === AuthStatus.NoAuth;
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -11,9 +16,12 @@ function HeaderNav({authorized}:props): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             {
-              authorized ? (
+              authorized && (
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-              ) : (
+              )
+            }
+            {
+              notAuthorized && (
                 <span className="header__login">Sign in</span>
               )
             }

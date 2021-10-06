@@ -1,18 +1,21 @@
-import HomePlaces from '../home-places';
+import Header from '../header';
 import HomeMap from '../home-map';
+import HomePlaces from '../home-places';
+
 import { City } from '../../types';
+import { AuthStatus } from '../../const';
 
 type Props = {
+  authStatus:AuthStatus,
   data:City[],
-  children: React.ReactNode
 }
 
-function Home({data, children}:Props): JSX.Element {
+function Home({authStatus, data}:Props): JSX.Element {
   const activeIndex = 3;
 
   return (
     <div className="page page--gray page--main">
-      {children}
+      <Header authStatus={authStatus} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

@@ -1,11 +1,14 @@
+import Header from '../header';
+import { AuthStatus } from '../../const';
+
 type props = {
-  children: React.ReactNode
+  authStatus:AuthStatus,
 }
 
-function Login({children}:props): JSX.Element {
+function Login({authStatus}:props): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      {children}
+      <Header authStatus={authStatus} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

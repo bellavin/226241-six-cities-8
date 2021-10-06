@@ -1,37 +1,61 @@
-/* eslint-disable */
-import Header from '../header';
 import Home from '../home';
 import Login from '../login';
-import Favorites from '../favorites';
 import Property from '../property';
-/* eslint-enable */
+import Favorites from '../favorites';
+import PrivateRoute from '../private-route';
+import NotFoundScreen from '../not-found-screen';
 
-import { CityPlaceDetail, City } from '../../types';
+import {CityPlaceDetail, City} from '../../types';
+import {AppRoute, AuthStatus} from '../../const';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 function App(): JSX.Element {
   return (
-    <>
-      <Home data={homeData}>
-        <Header authorized hasNavigation />
-      </Home>
-      {/* <Property data={propertyData}>
-        <Header authorized hasNavigation />
-      </Property> */}
-      {/* <Favorites data={favoritesData}>
-        <Header authorized hasNavigation />
-      </Favorites> */}
-      {/* <Login>
-        <Header authorized hasNavigation />
-      </Login> */}
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/'>
+          <Home
+            authStatus={authStatus}
+            data={homeData}
+          />
+        </Route>
+        <Route exact path='/offer/:1'>
+          <Property
+            authStatus={authStatus}
+            data={propertyData}
+          />
+        </Route>
+        <Route exact path='/login'>
+          <Login
+            authStatus={authStatus}
+          />
+        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.Favorites}
+          render={() => (
+            <Favorites
+              authStatus={authStatus}
+              data={favoritesData}
+            />
+          )}
+          authStatus={authStatus}
+        >
+        </PrivateRoute>
+        <Route>
+          <NotFoundScreen authStatus={authStatus} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
 export default App;
 
-/* eslint-disable */
 
-const homeData = [
+const authStatus:AuthStatus = AuthStatus.Auth;
+
+const homeData:City[] = [
   {
     id: 1,
     name: 'Paris',
@@ -106,14 +130,14 @@ const homeData = [
   {
     id: 5,
     name: 'Hamburg',
-    places: []
+    places: [],
   },
   {
     id: 6,
     name: 'Dusseldorf',
-    places: []
+    places: [],
   },
-]
+];
 
 const propertyData:CityPlaceDetail = {
   id: 1,
@@ -239,4 +263,3 @@ const favoritesData:City[] = [
     ],
   },
 ];
-/* eslint-enable */
