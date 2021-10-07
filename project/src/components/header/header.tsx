@@ -1,4 +1,4 @@
-import HeaderNav from '../header-nav';
+import HeaderNav from '../header-nav/header-nav';
 import { AuthStatus } from '../../const';
 
 type props = {

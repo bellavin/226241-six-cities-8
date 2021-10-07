@@ -1,4 +1,4 @@
-import { Review } from '../../types';
+import { Review } from '../../types/types';
 import { monthNames } from '../../const';
 
 

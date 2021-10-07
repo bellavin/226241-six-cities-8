@@ -1,6 +1,6 @@
-import Header from '../header';
+import Header from '../header/header';
 import { Link } from 'react-router-dom';
-import {AuthStatus} from '../../const';
+import { AuthStatus } from '../../const';
 
 type Props = {
   authStatus:AuthStatus,

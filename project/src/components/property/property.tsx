@@ -1,11 +1,11 @@
-import Header from '../header';
-import PropertyGallery from '../property-gallery';
-import PropertyDesc from '../property-desc';
-import PropertyReviews from '../property-reviews';
-import PropertyMap from '../property-map';
-import PropertyNear from '../property-near';
+import Header from '../header/header';
+import PropertyGallery from '../property-gallery/property-gallery';
+import PropertyDesc from '../property-desc/property-desc';
+import PropertyReviews from '../property-reviews/property-reviews';
+import PropertyMap from '../property-map/property-map';
+import PropertyNear from '../property-near/property-near';
 
-import { CityPlaceDetail } from '../../types';
+import { CityPlaceDetail } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 

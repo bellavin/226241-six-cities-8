@@ -1,7 +1,7 @@
-import Header from '../header';
-import FavoritesCity from '../favorites-city';
-import Footer from '../footer';
-import { City } from '../../types';
+import Header from '../header/header';
+import FavoritesCity from '../favorites-city/favorites-city';
+import Footer from '../footer/footer';
+import { City } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 type Props = {

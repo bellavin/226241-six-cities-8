@@ -1,31 +1,31 @@
-import Home from '../home';
-import Login from '../login';
-import Property from '../property';
-import Favorites from '../favorites';
-import PrivateRoute from '../private-route';
-import NotFoundScreen from '../not-found-screen';
+import Home from '../home/home';
+import Login from '../login/login';
+import Property from '../property/property';
+import Favorites from '../favorites/favorites';
+import PrivateRoute from '../private-route/private-route';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-import {CityPlaceDetail, City} from '../../types';
-import {AppRoute, AuthStatus} from '../../const';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { CityPlaceDetail, City } from '../../types/types';
+import { AppRoute, AuthStatus } from '../../const';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={AppRoute.Main}>
           <Home
             authStatus={authStatus}
             data={homeData}
           />
         </Route>
-        <Route exact path='/offer/:1'>
+        <Route exact path={AppRoute.Property}>
           <Property
             authStatus={authStatus}
             data={propertyData}
           />
         </Route>
-        <Route exact path='/login'>
+        <Route exact path={AppRoute.Login}>
           <Login
             authStatus={authStatus}
           />

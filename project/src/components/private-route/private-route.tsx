@@ -1,6 +1,6 @@
-import {Route, Redirect} from 'react-router-dom';
-import {RouteProps} from 'react-router-dom';
-import {AppRoute, AuthStatus} from '../../const';
+import { Route, Redirect } from 'react-router-dom';
+import { RouteProps } from 'react-router-dom';
+import { AppRoute, AuthStatus } from '../../const';
 
 type props = RouteProps & {
   render: () => JSX.Element;

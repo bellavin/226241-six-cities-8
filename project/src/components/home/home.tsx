@@ -1,8 +1,8 @@
-import Header from '../header';
-import HomeMap from '../home-map';
-import HomePlaces from '../home-places';
+import Header from '../header/header';
+import HomeMap from '../home-map/home-map';
+import HomePlaces from '../home-places/home-places';
 
-import { City } from '../../types';
+import { City } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 type Props = {
