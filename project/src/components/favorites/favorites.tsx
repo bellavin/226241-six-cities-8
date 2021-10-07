@@ -1,16 +1,18 @@
-import Footer from '../footer';
-import FavoritesCity from '../favorites-city';
-import { City } from '../../types';
+import Header from '../header/header';
+import FavoritesCity from '../favorites-city/favorites-city';
+import Footer from '../footer/footer';
+import { City } from '../../types/types';
+import { AuthStatus } from '../../const';
 
 type Props = {
+  authStatus:AuthStatus,
   data:City[],
-  children: React.ReactNode
 }
 
-function Favorites({data, children}:Props): JSX.Element {
+function Favorites({authStatus, data}:Props): JSX.Element {
   return (
     <div className="page">
-      {children}
+      <Header authStatus={authStatus} />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

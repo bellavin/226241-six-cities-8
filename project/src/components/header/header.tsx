@@ -1,11 +1,11 @@
-import HeaderNav from '../header-nav';
+import HeaderNav from '../header-nav/header-nav';
+import { AuthStatus } from '../../const';
 
 type props = {
-  authorized?:boolean,
-  hasNavigation?:boolean,
+  authStatus:AuthStatus,
 }
 
-function Header({authorized = false, hasNavigation = false}:props): JSX.Element {
+function Header({authStatus}:props): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -16,8 +16,8 @@ function Header({authorized = false, hasNavigation = false}:props): JSX.Element 
             </a>
           </div>
           {
-            hasNavigation && (
-              <HeaderNav authorized={authorized} />
+            authStatus !== AuthStatus.Unknown && (
+              <HeaderNav authStatus={authStatus} />
             )
           }
         </div>

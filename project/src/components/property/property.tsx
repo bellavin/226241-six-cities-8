@@ -1,19 +1,23 @@
-import PropertyGallery from '../property-gallery';
-import PropertyDesc from '../property-desc';
-import PropertyReviews from '../property-reviews';
-import PropertyMap from '../property-map';
-import PropertyNear from '../property-near';
-import { CityPlaceDetail } from '../../types';
+import Header from '../header/header';
+import PropertyGallery from '../property-gallery/property-gallery';
+import PropertyDesc from '../property-desc/property-desc';
+import PropertyReviews from '../property-reviews/property-reviews';
+import PropertyMap from '../property-map/property-map';
+import PropertyNear from '../property-near/property-near';
+
+import { CityPlaceDetail } from '../../types/types';
+import { AuthStatus } from '../../const';
+
 
 type Props = {
+  authStatus:AuthStatus,
   data: CityPlaceDetail,
-  children: React.ReactNode,
 }
 
-function Property({data, children}:Props): JSX.Element {
+function Property({authStatus, data}:Props): JSX.Element {
   return (
     <div className="page">
-      {children}
+      <Header authStatus={authStatus} />
 
       <main className="page__main page__main--property">
         <section className="property">

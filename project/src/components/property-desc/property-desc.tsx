@@ -1,4 +1,4 @@
-import { CityPlaceDetail } from '../../types';
+import { CityPlaceDetail } from '../../types/types';
 
 type Props = {
   data:CityPlaceDetail,

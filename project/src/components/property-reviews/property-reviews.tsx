@@ -1,4 +1,6 @@
-import { Review } from '../../types';
+import { Review } from '../../types/types';
+import { monthNames } from '../../const';
+
 
 type Props = {
   data: Review[],
@@ -6,14 +8,12 @@ type Props = {
 
 function PropertyReviews({data}:Props): JSX.Element {
 
-
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
       <ul className="reviews__list">
         {data.map((item) => {
           const dateInstance = new Date(item.date);
-          const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
           const month = monthNames[dateInstance.getMonth()];
           const year = dateInstance.getFullYear();
           const date = `${month} ${year}` ;

@@ -1,5 +1,5 @@
-import FavoritesCityPlace from '../favorites-city-place';
-import { City } from '../../types';
+import FavoritesCityPlace from '../favorites-city-place/favorites-city-place';
+import { City } from '../../types/types';
 
 type Props = {
   data: City
