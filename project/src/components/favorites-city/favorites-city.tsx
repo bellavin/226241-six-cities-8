@@ -1,18 +1,24 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 import FavoritesCityPlace from '../favorites-city-place/favorites-city-place';
-import { City } from '../../types/types';
+import { Item } from '../../types/types';
 
 type Props = {
-  data: City
+  data :{
+    name :string;
+    places :Item[];
+  };
 }
 
-function FavoritesCity({data}:Props): JSX.Element {
+function FavoritesCity({data} :Props) :JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to={AppRoute.Property}>
             <span>{data.name}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">

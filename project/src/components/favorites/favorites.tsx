@@ -1,15 +1,27 @@
 import Header from '../header/header';
 import FavoritesCity from '../favorites-city/favorites-city';
 import Footer from '../footer/footer';
-import { City } from '../../types/types';
+import { Item } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 type Props = {
-  authStatus:AuthStatus,
-  data:City[],
+  authStatus :AuthStatus;
+  data :Item[];
 }
 
-function Favorites({authStatus, data}:Props): JSX.Element {
+function Favorites({authStatus, data} :Props) :JSX.Element {
+  const cityNames = new Set('');
+  data.forEach((item)=>{
+    cityNames.add(item.city);
+  });
+  const cities = [...cityNames].map((city, i) => (
+    {
+      id: i,
+      name: city,
+      places: data.filter((place) => place.city !== city),
+    }
+  ));
+
   return (
     <div className="page">
       <Header authStatus={authStatus} />
@@ -19,7 +31,7 @@ function Favorites({authStatus, data}:Props): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {data.map((item) => (
+              {cities.map((item) => (
                 <FavoritesCity
                   key={item.id}
                   data={item}

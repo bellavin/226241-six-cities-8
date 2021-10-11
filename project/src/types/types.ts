@@ -1,7 +1,7 @@
 export type User = {
-  img: string,
-  name: string,
-  isPro?: boolean
+  img :string,
+  name :string,
+  isPro : boolean,
 };
 
 export type Review = {
@@ -19,12 +19,12 @@ export type CityPlaceDetailDesc = {
   title: string,
   user: User,
   text: string[],
-  reviews: Review[],
 };
 
 export type CityPlaceDetail = {
   id: number,
-  img: string[],
+  img: string,
+  gallery: string[],
   price: number,
   stars: number,
   name: string,
@@ -32,7 +32,6 @@ export type CityPlaceDetail = {
   isFeature?: boolean,
   isPremium?: boolean,
   desc: CityPlaceDetailDesc,
-  near: CityPlace[],
 };
 
 export type CityPlace = {
@@ -51,3 +50,26 @@ export type City = {
   name: string,
   places: CityPlace[],
 };
+
+
+export type ItemDetail = {
+  bedrooms :number,
+  maxAdults :number,
+  includes :string[],
+  user: User,
+  description :string,
+}
+
+export type Item = {
+  id :number,
+  city :string,
+  img :string,
+  gallery :string[],
+  price :number,
+  stars :number,
+  name :string,
+  type :string,
+  isFeature :boolean,
+  isPremium :boolean,
+  detail :ItemDetail,
+}

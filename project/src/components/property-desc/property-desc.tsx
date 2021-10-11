@@ -1,12 +1,12 @@
-import { CityPlaceDetail } from '../../types/types';
+import { Item } from '../../types/types';
 
 type Props = {
-  data:CityPlaceDetail,
+  data :Item,
 }
 
 function PropertyDesc({data}:Props): JSX.Element {
   const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
-  const userProClassName = data.desc.user.isPro ? ' property__avatar-wrapper--pro' : '';
+  const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
 
   return (
@@ -41,10 +41,10 @@ function PropertyDesc({data}:Props): JSX.Element {
           {data.type}
         </li>
         <li className="property__feature property__feature--bedrooms">
-          {data.desc.bedrooms} Bedrooms
+          {data.detail.bedrooms} Bedrooms
         </li>
         <li className="property__feature property__feature--adults">
-          Max {data.desc.maxAdults} adults
+          Max {data.detail.maxAdults} adults
         </li>
       </ul>
       <div className="property__price">
@@ -54,7 +54,7 @@ function PropertyDesc({data}:Props): JSX.Element {
       <div className="property__inside">
         <h2 className="property__inside-title">What&apos;s inside</h2>
         <ul className="property__inside-list">
-          {data.desc.includes.map((item)=> (
+          {data.detail.includes.map((item)=> (
             <li key={item} className="property__inside-item">
               {item}
             </li>
@@ -62,16 +62,16 @@ function PropertyDesc({data}:Props): JSX.Element {
         </ul>
       </div>
       <div className="property__host">
-        <h2 className="property__host-title">{data.desc.title}</h2>
+        <h2 className="property__host-title">Meet the host</h2>
         <div className="property__host-user user">
           <div className={`property__avatar-wrapper user__avatar-wrapper${userProClassName}`}>
-            <img className="property__avatar user__avatar" src={data.desc.user.img} width="74" height="74" alt="Host avatar" />
+            <img className="property__avatar user__avatar" src={data.detail.user.img} width="74" height="74" alt="Host avatar" />
           </div>
           <span className="property__user-name">
-            {data.desc.user.name}
+            {data.detail.user.name}
           </span>
           {
-            data.desc.user.isPro && (
+            data.detail.user.isPro && (
               <span className="property__user-status">
                 Pro
               </span>
@@ -79,14 +79,9 @@ function PropertyDesc({data}:Props): JSX.Element {
           }
         </div>
         <div className="property__description">
-          {data.desc.text.map((item, i)=> {
-            const key = i;
-            return (
-              <p key={key} className="property__text">
-                {item}
-              </p>
-            );
-          })}
+          <p className="property__text">
+            {data.detail.description}
+          </p>
         </div>
       </div>
     </>

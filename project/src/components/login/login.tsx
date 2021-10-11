@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
+import { AppRoute, AuthStatus } from '../../const';
+
 import Header from '../header/header';
-import { AuthStatus } from '../../const';
 
 type props = {
   authStatus:AuthStatus,
@@ -28,9 +30,9 @@ function Login({authStatus}:props): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to={AppRoute.Main}>
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
