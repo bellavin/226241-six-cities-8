@@ -1,7 +1,7 @@
 import { Item } from '../../types/types';
 
 type Props = {
-  data :Item,
+  data: Item,
 }
 
 function PropertyDesc({data}:Props): JSX.Element {

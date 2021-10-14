@@ -4,10 +4,10 @@ import PropertyReviewsForm from '../property-reviews-form/property-reviews-form'
 
 
 type Props = {
-  data :Review[],
+  data: Review[],
 }
 
-function PropertyReviews({data} :Props) :JSX.Element {
+function PropertyReviews({data}: Props): JSX.Element {
 
   return (
     <section className="property__reviews reviews">

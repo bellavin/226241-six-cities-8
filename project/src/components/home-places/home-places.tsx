@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Item } from '../../types/types';
 
 type Props = {
-  data :Item[];
+  data: Item[];
 }
 
-function HomePlaces({data} :Props) :JSX.Element {
-  const [activeId, setActiveId] = useState(NaN);
+function HomePlaces({data}: Props): JSX.Element {
   /* eslint-disable */
-  console.log(activeId);
+  const [activeId, setActiveId] = useState('');
   /* eslint-enable */
 
   return (
@@ -37,13 +36,13 @@ function HomePlaces({data} :Props) :JSX.Element {
         {data.map((item) => {
           const featureClassName = item.isFeature ? ' place-card__bookmark-button--active' : '';
           const stars = `${Math.floor(item.stars) * 20}%`;
-
+          const id: string = item.id;
           return (
             <article
               key={item.id}
               className="cities__place-card place-card"
               onMouseEnter={() => setActiveId(item.id)}
-              onMouseLeave={() => setActiveId(NaN)}
+              onMouseLeave={() => setActiveId('')}
             >
               {
                 item.isPremium && (
@@ -53,7 +52,7 @@ function HomePlaces({data} :Props) :JSX.Element {
                 )
               }
               <div className="cities__image-wrapper place-card__image-wrapper">
-                <Link to={AppRoute.Property}>
+                <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
                   <img className="place-card__image" src={item.img} width="260" height="200" alt="Place image" />
                 </Link>
               </div>
@@ -77,7 +76,7 @@ function HomePlaces({data} :Props) :JSX.Element {
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <Link to={AppRoute.Property}>
+                  <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
                     {item.name}
                   </Link>
                 </h2>

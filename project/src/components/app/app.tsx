@@ -11,11 +11,11 @@ import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type Props = {
-  offers :Item[];
-  reviews :Review[];
+  offers: Item[];
+  reviews: Review[];
 }
 
-function App({offers, reviews} :Props) :JSX.Element {
+function App({offers, reviews}: Props): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -30,7 +30,7 @@ function App({offers, reviews} :Props) :JSX.Element {
             near={offers}
             authStatus={authStatus}
             reviews={reviews}
-            data={offers[0]}
+            data={offers}
           />
         </Route>
         <Route exact path={AppRoute.Login}>

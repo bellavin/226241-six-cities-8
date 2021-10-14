@@ -6,17 +6,17 @@ import { AuthStatus } from '../../const';
 
 type Props = {
   authStatus :AuthStatus;
-  data :Item[];
+  data: Item[];
 }
 
-function Favorites({authStatus, data} :Props) :JSX.Element {
+function Favorites({authStatus, data}: Props): JSX.Element {
   const cityNames = new Set('');
   data.forEach((item)=>{
     cityNames.add(item.city);
   });
   const cities = [...cityNames].map((city, i) => (
     {
-      id: i,
+      id: `${i}`,
       name: city,
       places: data.filter((place) => place.city !== city),
     }

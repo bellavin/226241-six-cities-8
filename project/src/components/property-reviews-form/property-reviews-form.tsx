@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function PropertyReviewsForm() :JSX.Element {
+function PropertyReviewsForm(): JSX.Element {
   const [sarstVal, setSarstVal] = useState(0);
   const [textVal, setTextVal] = useState('');
 

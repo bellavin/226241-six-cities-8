@@ -8,10 +8,10 @@ import HomePlaces from '../home-places/home-places';
 
 type Props = {
   authStatus :AuthStatus;
-  data :Item[];
+  data: Item[];
 }
 
-function Home({authStatus, data} :Props) :JSX.Element {
+function Home({authStatus, data}: Props): JSX.Element {
   const activeIndex = 1;
 
   const cities = new Set('');

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 import FavoritesCityPlace from '../favorites-city-place/favorites-city-place';
@@ -6,17 +6,20 @@ import { Item } from '../../types/types';
 
 type Props = {
   data :{
-    name :string;
-    places :Item[];
+    id: string;
+    name: string;
+    places: Item[];
   };
 }
 
-function FavoritesCity({data} :Props) :JSX.Element {
+function FavoritesCity({data}: Props): JSX.Element {
+  const id: string = data.id;
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={AppRoute.Property}>
+          <Link className="locations__item-link" to={{pathname: generatePath(AppRoute.Property, {id})}}>
             <span>{data.name}</span>
           </Link>
         </div>
