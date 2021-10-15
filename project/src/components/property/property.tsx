@@ -5,34 +5,44 @@ import PropertyReviews from '../property-reviews/property-reviews';
 import PropertyMap from '../property-map/property-map';
 import PropertyNear from '../property-near/property-near';
 
-import { CityPlaceDetail } from '../../types/types';
+import { Item, Review } from '../../types/types';
 import { AuthStatus } from '../../const';
+import { useParams } from 'react-router-dom';
 
 
 type Props = {
-  authStatus:AuthStatus,
-  data: CityPlaceDetail,
+  authStatus: AuthStatus;
+  near: Item[];
+  reviews: Review[];
+  data: Item[];
 }
 
-function Property({authStatus, data}:Props): JSX.Element {
+function Property({authStatus, near, reviews, data}: Props): JSX.Element {
+
+  const params: {
+    id: string
+  } = useParams();
+
+  const curData: Item[] = data.filter((item) => item.id === params.id);
+
   return (
     <div className="page">
       <Header authStatus={authStatus} />
 
       <main className="page__main page__main--property">
         <section className="property">
-          <PropertyGallery data={data.img} />
+          <PropertyGallery data={curData[0].gallery} />
           <div className="property__container container">
             <div className="property__wrapper">
               <PropertyDesc
-                data={data}
+                data={curData[0]}
               />
-              <PropertyReviews data={data.desc.reviews} />
+              <PropertyReviews data={reviews} />
             </div>
           </div>
           <PropertyMap />
         </section>
-        <PropertyNear data={data.near} />
+        <PropertyNear data={near} />
       </main>
     </div>
   );

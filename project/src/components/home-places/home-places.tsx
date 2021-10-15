@@ -1,22 +1,49 @@
-import { CityPlace } from '../../types/types';
+import { useState } from 'react';
+import { Link, generatePath } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { Item } from '../../types/types';
 
 type Props = {
-  data:CityPlace[],
-  children: React.ReactNode
+  data: Item[];
 }
 
-function HomePlaces({data, children}:Props): JSX.Element {
+function HomePlaces({data}: Props): JSX.Element {
+  /* eslint-disable */
+  const [activeId, setActiveId] = useState<string | null>(null);
+  /* eslint-enable */
+
   return (
     <section className="cities__places places">
-      {children}
+      <h2 className="visually-hidden">Places</h2>
+      <b className="places__found">{data.length} places to stay in {data[0].city}</b>
+      <form className="places__sorting" action="#" method="get">
+        <span className="places__sorting-caption">Sort by</span>
+        <span className="places__sorting-type" tabIndex={0}>
+          Popular
+          <svg className="places__sorting-arrow" width="7" height="4">
+            <use xlinkHref="#icon-arrow-select"></use>
+          </svg>
+        </span>
+        <ul className="places__options places__options--custom places__options--opened">
+          <li className="places__option places__option--active" tabIndex={0}>Popular</li>
+          <li className="places__option" tabIndex={0}>Price: low to high</li>
+          <li className="places__option" tabIndex={0}>Price: high to low</li>
+          <li className="places__option" tabIndex={0}>Top rated first</li>
+        </ul>
+      </form>
 
       <div className="cities__places-list places__list tabs__content">
         {data.map((item) => {
           const featureClassName = item.isFeature ? ' place-card__bookmark-button--active' : '';
           const stars = `${Math.floor(item.stars) * 20}%`;
-
+          const {id} = item;
           return (
-            <article key={item.id} className="cities__place-card place-card">
+            <article
+              key={item.id}
+              className="cities__place-card place-card"
+              onMouseEnter={() => setActiveId(item.id)}
+              onMouseLeave={() => setActiveId(null)}
+            >
               {
                 item.isPremium && (
                   <div className="place-card__mark">
@@ -25,9 +52,9 @@ function HomePlaces({data, children}:Props): JSX.Element {
                 )
               }
               <div className="cities__image-wrapper place-card__image-wrapper">
-                <a href="#">
+                <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
                   <img className="place-card__image" src={item.img} width="260" height="200" alt="Place image" />
-                </a>
+                </Link>
               </div>
               <div className="place-card__info">
                 <div className="place-card__price-wrapper">
@@ -49,7 +76,9 @@ function HomePlaces({data, children}:Props): JSX.Element {
                   </div>
                 </div>
                 <h2 className="place-card__name">
-                  <a href="#">{item.name}</a>
+                  <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
+                    {item.name}
+                  </Link>
                 </h2>
                 <p className="place-card__type">{item.type}</p>
               </div>

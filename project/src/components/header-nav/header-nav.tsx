@@ -1,4 +1,5 @@
-import { AuthStatus } from '../../const';
+import { Link } from 'react-router-dom';
+import { AuthStatus, AppRoute } from '../../const';
 
 type props = {
   authStatus:AuthStatus,
@@ -12,7 +13,7 @@ function HeaderNav({authStatus}:props): JSX.Element {
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <a className="header__nav-link header__nav-link--profile" href="#">
+          <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             {
@@ -25,14 +26,14 @@ function HeaderNav({authStatus}:props): JSX.Element {
                 <span className="header__login">Sign in</span>
               )
             }
-          </a>
+          </Link>
         </li>
         {
           authorized && (
             <li className="header__nav-item">
-              <a className="header__nav-link" href="#">
+              <Link className="header__nav-link" to={AppRoute.Login}>
                 <span className="header__signout">Sign out</span>
-              </a>
+              </Link>
             </li>
           )
         }

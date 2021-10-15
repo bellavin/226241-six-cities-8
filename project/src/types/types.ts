@@ -1,11 +1,11 @@
 export type User = {
   img: string,
   name: string,
-  isPro?: boolean
+  isPro: boolean,
 };
 
 export type Review = {
-  id: number,
+  id: string,
   stars: number,
   text: string,
   date: string | number,
@@ -19,35 +19,46 @@ export type CityPlaceDetailDesc = {
   title: string,
   user: User,
   text: string[],
-  reviews: Review[],
-};
-
-export type CityPlaceDetail = {
-  id: number,
-  img: string[],
-  price: number,
-  stars: number,
-  name: string,
-  type: string,
-  isFeature?: boolean,
-  isPremium?: boolean,
-  desc: CityPlaceDetailDesc,
-  near: CityPlace[],
 };
 
 export type CityPlace = {
-  id: number,
+  id: string,
   img: string,
+  gallery: string[],
   price: number,
   stars: number,
   name: string,
   type: string,
-  isFeature?: boolean,
-  isPremium?: boolean,
+  isFeature: boolean,
+  isPremium: boolean,
+  detail: ItemDetail,
 };
 
 export type City = {
-  id: number,
+  id: string,
   name: string,
   places: CityPlace[],
 };
+
+
+export type ItemDetail = {
+  bedrooms: number,
+  maxAdults: number,
+  includes: string[],
+  user: User,
+  description: string,
+}
+
+export type Item = {
+  id: string,
+  city: string,
+  img: string,
+  gallery: string[],
+  price: number,
+  stars: number,
+  name: string,
+  type: string,
+  isFeature: boolean,
+  isPremium: boolean,
+  detail: ItemDetail,
+}

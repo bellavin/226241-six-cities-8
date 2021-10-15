@@ -1,17 +1,23 @@
+import { AuthStatus } from '../../const';
+import { Item } from '../../types/types';
+
 import Header from '../header/header';
 import HomeMap from '../home-map/home-map';
 import HomePlaces from '../home-places/home-places';
 
-import { City } from '../../types/types';
-import { AuthStatus } from '../../const';
 
 type Props = {
-  authStatus:AuthStatus,
-  data:City[],
+  authStatus: AuthStatus;
+  data: Item[];
 }
 
-function Home({authStatus, data}:Props): JSX.Element {
-  const activeIndex = 3;
+function Home({authStatus, data}: Props): JSX.Element {
+  const activeIndex = 1;
+
+  const cities = new Set('');
+  data.forEach((item)=>{
+    cities.add(item.city);
+  });
 
   return (
     <div className="page page--gray page--main">
@@ -22,13 +28,13 @@ function Home({authStatus, data}:Props): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {data.map((item, i) => {
+              {[...cities].map((item, i) => {
                 const activeClassName = (i === activeIndex) ? ' tabs__item--active' : '';
 
                 return(
-                  <li key={item.id} className="locations__item">
+                  <li key={item} className="locations__item">
                     <a className={`locations__item-link tabs__item${activeClassName}`} href="#">
-                      <span>{item.name}</span>
+                      <span>{item}</span>
                     </a>
                   </li>
                 );
@@ -38,25 +44,7 @@ function Home({authStatus, data}:Props): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <HomePlaces data={data[activeIndex].places}>
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{data[activeIndex].places.length} places to stay in {data[activeIndex].name}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-            </HomePlaces>
+            <HomePlaces data={data} />
             <div className="cities__right-section">
               <HomeMap />
             </div>

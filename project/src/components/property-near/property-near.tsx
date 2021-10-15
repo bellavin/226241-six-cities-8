@@ -1,10 +1,12 @@
+import { Link, generatePath } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { CityPlace } from '../../types/types';
 
 type Props = {
-  data:CityPlace[],
+  data: CityPlace[];
 }
 
-function PropertyNear({data}:Props): JSX.Element {
+function PropertyNear({data}: Props): JSX.Element {
   return (
     <div className="container">
       <section className="near-places places">
@@ -13,13 +15,14 @@ function PropertyNear({data}:Props): JSX.Element {
           {data.map((item) => {
             const featureClassName = item.isFeature ? 'place-card__bookmark-button--active' : '';
             const stars = `${Math.floor(item.stars) * 20}%`;
+            const {id} = item;
 
             return (
               <article key={item.id} className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
                     <img className="place-card__image" src={item.img} width="260" height="200" alt="Place image" />
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -47,7 +50,9 @@ function PropertyNear({data}:Props): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">{item.name}</a>
+                    <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
+                      {item.name}
+                    </Link>
                   </h2>
                   <p className="place-card__type">{item.type}</p>
                 </div>
