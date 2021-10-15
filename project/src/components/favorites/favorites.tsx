@@ -5,7 +5,7 @@ import { Item } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 type Props = {
-  authStatus :AuthStatus;
+  authStatus: AuthStatus;
   data: Item[];
 }
 

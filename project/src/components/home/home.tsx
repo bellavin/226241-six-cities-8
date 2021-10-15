@@ -7,7 +7,7 @@ import HomePlaces from '../home-places/home-places';
 
 
 type Props = {
-  authStatus :AuthStatus;
+  authStatus: AuthStatus;
   data: Item[];
 }
 

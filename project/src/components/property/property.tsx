@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 
 type Props = {
-  authStatus :AuthStatus;
+  authStatus: AuthStatus;
   near: Item[];
   reviews: Review[];
   data: Item[];

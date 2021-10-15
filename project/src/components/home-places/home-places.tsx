@@ -9,7 +9,7 @@ type Props = {
 
 function HomePlaces({data}: Props): JSX.Element {
   /* eslint-disable */
-  const [activeId, setActiveId] = useState('');
+  const [activeId, setActiveId] = useState<string | null>(null);
   /* eslint-enable */
 
   return (
@@ -36,13 +36,13 @@ function HomePlaces({data}: Props): JSX.Element {
         {data.map((item) => {
           const featureClassName = item.isFeature ? ' place-card__bookmark-button--active' : '';
           const stars = `${Math.floor(item.stars) * 20}%`;
-          const id: string = item.id;
+          const {id} = item;
           return (
             <article
               key={item.id}
               className="cities__place-card place-card"
               onMouseEnter={() => setActiveId(item.id)}
-              onMouseLeave={() => setActiveId('')}
+              onMouseLeave={() => setActiveId(null)}
             >
               {
                 item.isPremium && (

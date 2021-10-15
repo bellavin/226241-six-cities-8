@@ -59,4 +59,4 @@ function App({offers, reviews}: Props): JSX.Element {
 export default App;
 
 
-const authStatus :AuthStatus = AuthStatus.Auth;
+const authStatus: AuthStatus = AuthStatus.Auth;

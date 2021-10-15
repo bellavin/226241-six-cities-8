@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 import { CityPlace } from '../../types/types';
 
 type Props = {
-  data :CityPlace[],
+  data: CityPlace[];
 }
 
 function PropertyNear({data}: Props): JSX.Element {
@@ -15,7 +15,7 @@ function PropertyNear({data}: Props): JSX.Element {
           {data.map((item) => {
             const featureClassName = item.isFeature ? 'place-card__bookmark-button--active' : '';
             const stars = `${Math.floor(item.stars) * 20}%`;
-            const id = item.id;
+            const {id} = item;
 
             return (
               <article key={item.id} className="near-places__card place-card">

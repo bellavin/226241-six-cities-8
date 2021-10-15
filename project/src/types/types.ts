@@ -31,7 +31,7 @@ export type CityPlace = {
   type: string,
   isFeature: boolean,
   isPremium: boolean,
-  detail :ItemDetail,
+  detail: ItemDetail,
 };
 
 export type City = {
@@ -60,5 +60,5 @@ export type Item = {
   type: string,
   isFeature: boolean,
   isPremium: boolean,
-  detail :ItemDetail,
+  detail: ItemDetail,
 }

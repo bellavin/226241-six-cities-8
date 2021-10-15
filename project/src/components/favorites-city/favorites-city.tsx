@@ -5,7 +5,7 @@ import FavoritesCityPlace from '../favorites-city-place/favorites-city-place';
 import { Item } from '../../types/types';
 
 type Props = {
-  data :{
+  data: {
     id: string;
     name: string;
     places: Item[];
@@ -13,7 +13,7 @@ type Props = {
 }
 
 function FavoritesCity({data}: Props): JSX.Element {
-  const id: string = data.id;
+  const {id} = data;
 
   return (
     <li className="favorites__locations-items">

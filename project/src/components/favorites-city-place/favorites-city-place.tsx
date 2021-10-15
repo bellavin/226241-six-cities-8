@@ -3,12 +3,12 @@ import { AppRoute } from '../../const';
 import { CityPlace } from '../../types/types';
 
 type Props = {
-  data :CityPlace
+  data: CityPlace;
 }
 
 function FavoritesCityPlace({data}: Props): JSX.Element {
   const stars = `${Math.floor(data.stars) * 20}%`;
-  const id: string = data.id;
+  const {id} = data;
 
   return (
     <article className="favorites__card place-card">
