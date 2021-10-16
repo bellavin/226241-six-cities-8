@@ -1,9 +1,9 @@
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { CityPlace } from '../../types/types';
+import { Item } from '../../types/types';
 
 type Props = {
-  data: CityPlace[];
+  data: Item[];
 }
 
 function PropertyNear({data}: Props): JSX.Element {

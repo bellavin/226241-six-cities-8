@@ -3,7 +3,17 @@ import { Item } from '../types/types';
 export const offers: Item[] = [
   {
     id: '1',
-    city: 'Brussels',
+    city: {
+      name: 'Amsterdam',
+      lat: 50.85045,
+      lng: 4.34878,
+      zoom: 13,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+      zoom: 16,
+    },
     img: 'img/apartment-01.jpg',
     gallery: [
       'img/apartment-03.jpg',
@@ -51,7 +61,17 @@ export const offers: Item[] = [
   },
   {
     id: '2',
-    city: 'Brussels',
+    city: {
+      name: 'Amsterdam',
+      lat: 50.85045,
+      lng: 4.34878,
+      zoom: 13,
+    },
+    location: {
+      lat: 52.369553943508,
+      lng: 4.85309666406198,
+      zoom: 16,
+    },
     img: 'img/apartment-01.jpg',
     gallery: [
       'img/room.jpg',
@@ -100,7 +120,17 @@ export const offers: Item[] = [
   },
   {
     id: '3',
-    city: 'Amsterdam',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.370216,
+      lng: 4.895168,
+      zoom: 13,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198,
+      zoom: 16,
+    },
     img: 'img/apartment-01.jpg',
     gallery: [
       'img/apartment-02.jpg',
@@ -143,7 +173,17 @@ export const offers: Item[] = [
   },
   {
     id: '4',
-    city: 'Brussels',
+    city: {
+      name: 'Amsterdam',
+      lat: 50.85045,
+      lng: 4.34878,
+      zoom: 13,
+    },
+    location: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+      zoom: 16,
+    },
     img: 'img/room.jpg',
     gallery: [
       'img/apartment-01.jpg',
