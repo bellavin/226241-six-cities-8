@@ -12,13 +12,14 @@ type Props = {
 function Favorites({authStatus, data}: Props): JSX.Element {
   const cityNames = new Set('');
   data.forEach((item)=>{
-    cityNames.add(item.city);
+    cityNames.add(item.city.name);
   });
+
   const cities = [...cityNames].map((city, i) => (
     {
       id: `${i}`,
       name: city,
-      places: data.filter((place) => place.city !== city),
+      places: data.filter((place) => place.city.name === city),
     }
   ));
 

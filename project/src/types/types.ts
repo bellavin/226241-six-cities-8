@@ -12,32 +12,17 @@ export type Review = {
   user: User,
 };
 
-export type CityPlaceDetailDesc = {
-  bedrooms: number,
-  maxAdults: number,
-  includes: string[],
-  title: string,
-  user: User,
-  text: string[],
-};
-
-export type CityPlace = {
-  id: string,
-  img: string,
-  gallery: string[],
-  price: number,
-  stars: number,
-  name: string,
-  type: string,
-  isFeature: boolean,
-  isPremium: boolean,
-  detail: ItemDetail,
-};
-
 export type City = {
-  id: string,
-  name: string,
-  places: CityPlace[],
+  name: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+};
+
+export type Point = {
+  title: string;
+  lat: number;
+  lng: number;
 };
 
 
@@ -51,7 +36,12 @@ export type ItemDetail = {
 
 export type Item = {
   id: string,
-  city: string,
+  city: City,
+  location: {
+    lat: number;
+    lng: number;
+    zoom: number;
+  },
   img: string,
   gallery: string[],
   price: number,

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AuthStatus } from '../../const';
 import { Item } from '../../types/types';
 
@@ -5,19 +6,23 @@ import Header from '../header/header';
 import HomeMap from '../home-map/home-map';
 import HomePlaces from '../home-places/home-places';
 
-
 type Props = {
   authStatus: AuthStatus;
   data: Item[];
 }
 
 function Home({authStatus, data}: Props): JSX.Element {
-  const activeIndex = 1;
+  const [activeId, setActiveId] = useState<string | null>(null);
 
+  const activeIndex = 0;
   const cities = new Set('');
   data.forEach((item)=>{
-    cities.add(item.city);
+    cities.add(item.city.name);
   });
+
+  const itemHoverHandler = (id: string | null) => {
+    setActiveId(id);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -44,9 +49,12 @@ function Home({authStatus, data}: Props): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <HomePlaces data={data} />
+            <HomePlaces itemHoverHandler={itemHoverHandler} data={data} />
             <div className="cities__right-section">
-              <HomeMap />
+              <HomeMap
+                data={data}
+                activeId={activeId}
+              />
             </div>
           </div>
         </div>

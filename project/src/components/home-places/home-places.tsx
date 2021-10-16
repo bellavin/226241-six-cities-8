@@ -4,18 +4,31 @@ import { AppRoute } from '../../const';
 import { Item } from '../../types/types';
 
 type Props = {
+  itemHoverHandler: (id: string | null) => void;
   data: Item[];
 }
 
-function HomePlaces({data}: Props): JSX.Element {
-  /* eslint-disable */
-  const [activeId, setActiveId] = useState<string | null>(null);
-  /* eslint-enable */
+const sortList: string[] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];
+
+function HomePlaces({itemHoverHandler, data}: Props): JSX.Element {
+  const [sortActiveId, setSortActiveId] = useState<number | null>(null);
+  const sortClassName = (id: number) => `places__option${(sortActiveId === id) ? ' places__option--active' : ''}`;
+  const mouseEnterHandler = (id: number): void => {
+    setSortActiveId(id);
+  };
+  const mouseLeaveHandler = (): void => {
+    setSortActiveId(null);
+  };
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{data.length} places to stay in {data[0].city}</b>
+      <b className="places__found">{data.length} places to stay in {data[0].city.name}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -25,10 +38,19 @@ function HomePlaces({data}: Props): JSX.Element {
           </svg>
         </span>
         <ul className="places__options places__options--custom places__options--opened">
-          <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-          <li className="places__option" tabIndex={0}>Price: low to high</li>
-          <li className="places__option" tabIndex={0}>Price: high to low</li>
-          <li className="places__option" tabIndex={0}>Top rated first</li>
+          {sortList.map((item, i) =>
+            (
+              <li
+                key={item}
+                className={sortClassName(i)}
+                tabIndex={0}
+                onMouseEnter={() => {mouseEnterHandler(i);}}
+                onMouseLeave={mouseLeaveHandler}
+              >
+                {item}
+              </li>
+            ),
+          )}
         </ul>
       </form>
 
@@ -41,8 +63,12 @@ function HomePlaces({data}: Props): JSX.Element {
             <article
               key={item.id}
               className="cities__place-card place-card"
-              onMouseEnter={() => setActiveId(item.id)}
-              onMouseLeave={() => setActiveId(null)}
+              onMouseEnter={() => {
+                itemHoverHandler(item.id);
+              }}
+              onMouseLeave={() => {
+                itemHoverHandler(null);
+              }}
             >
               {
                 item.isPremium && (

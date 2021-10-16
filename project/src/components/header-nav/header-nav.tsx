@@ -6,7 +6,7 @@ type props = {
 }
 
 function HeaderNav({authStatus}:props): JSX.Element {
-  const authorized = authStatus === AuthStatus.Auth;
+  const isAuthorized = authStatus === AuthStatus.Auth;
   const notAuthorized = authStatus === AuthStatus.NoAuth;
 
   return (
@@ -17,7 +17,7 @@ function HeaderNav({authStatus}:props): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             {
-              authorized && (
+              isAuthorized && (
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
               )
             }
@@ -29,7 +29,7 @@ function HeaderNav({authStatus}:props): JSX.Element {
           </Link>
         </li>
         {
-          authorized && (
+          isAuthorized && (
             <li className="header__nav-item">
               <Link className="header__nav-link" to={AppRoute.Login}>
                 <span className="header__signout">Sign out</span>
