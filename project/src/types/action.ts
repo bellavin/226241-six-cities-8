@@ -1,10 +1,13 @@
 import {
-  checkCity
+  setCity,
+  filterOffers
 } from '../store/action';
 
 export enum ActionType {
-  CheckCity = 'City',
+  SetCity = 'City',
+  FilterOffers = 'FilterOffers'
 }
 
 export type Actions =
-  | ReturnType<typeof checkCity>;
+  | ReturnType<typeof setCity>
+  | ReturnType<typeof filterOffers>;

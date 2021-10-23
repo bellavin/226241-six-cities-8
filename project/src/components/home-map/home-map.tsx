@@ -42,7 +42,7 @@ function HomeMap({activeId, data}: Props): JSX.Element {
           .addTo(map);
       });
 
-      map.flyTo([data[0].city.lat, data[0].city.lng], 13,);
+      map.flyTo([data[0].city.lat, data[0].city.lng], 13);
       map.scrollWheelZoom.disable();
       return () => {
         // marker.clearLayers();

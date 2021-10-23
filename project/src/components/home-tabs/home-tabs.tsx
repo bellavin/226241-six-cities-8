@@ -1,30 +1,30 @@
-import { Cities } from '../../const';
+import { MouseEventHandler } from 'react';
 
 
 type Props = {
   activeCity: string | undefined;
-  checkCityHandler: any;
+  cityList: string[],
+  setCityHandler: MouseEventHandler<HTMLAnchorElement>;
 }
 
-function HomeTabs({activeCity, checkCityHandler}: Props): JSX.Element {
+function HomeTabs({activeCity, cityList, setCityHandler}: Props): JSX.Element {
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {Cities.map((item) => {
-            const {name} = item;
-            const activeClassName = (name === activeCity) ? ' tabs__item--active' : '';
+          {cityList.map((item) => {
+            const activeClassName = (item === activeCity) ? ' tabs__item--active' : '';
 
             return(
-              <li key={name} className="locations__item">
+              <li key={item} className="locations__item">
                 <a
-                  onClick={checkCityHandler}
-                  data-city={name}
+                  onClick={setCityHandler}
+                  data-city={item}
                   className={`locations__item-link tabs__item${activeClassName}`}
                   href="#"
                 >
-                  <span>{name}</span>
+                  <span>{item}</span>
                 </a>
               </li>
             );

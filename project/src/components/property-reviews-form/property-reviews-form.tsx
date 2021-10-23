@@ -9,7 +9,9 @@ const markList = [
 ];
 
 function PropertyReviewsForm(): JSX.Element {
-  const [sarstVal, setSarstVal] = useState(0);
+  /* eslint-disable */
+  const [starsVal, setStarsVal] = useState(0);
+  /* eslint-enable */
   const [textVal, setTextVal] = useState('');
 
   return (
@@ -36,7 +38,7 @@ function PropertyReviewsForm(): JSX.Element {
                   id={`${numOfStars}-stars`}
                   type="radio"
                   onChange={(evt)=>{
-                    setSarstVal(parseInt(evt.target.value, 10));
+                    setStarsVal(parseInt(evt.target.value, 10));
                   }}
                 />
                 <label htmlFor={`${numOfStars}-stars`} className="reviews__rating-label form__rating-label" title={item}>

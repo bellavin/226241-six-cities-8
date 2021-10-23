@@ -55,5 +55,6 @@ export type Item = {
 
 export type State = {
   activeCity: string | undefined,
-  offers: Item[],
+  offerList: Item[],
+  cityList: string[]
 };

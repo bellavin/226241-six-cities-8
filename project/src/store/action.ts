@@ -1,6 +1,11 @@
 import {ActionType} from '../types/action';
 
-export const checkCity = (city: string | undefined) => ({
-  type: ActionType.CheckCity,
-  payload: city
+export const setCity = (city: string | undefined) => ({
+  type: ActionType.SetCity,
+  payload: city,
+} as const);
+
+export const filterOffers = (city: string | undefined) => ({
+  type: ActionType.FilterOffers,
+  payload: city,
 } as const);
