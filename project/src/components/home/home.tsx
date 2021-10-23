@@ -1,66 +1,54 @@
-import { useState } from 'react';
+import { MouseEvent } from 'react';
+import { Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { AuthStatus } from '../../const';
-import { Item } from '../../types/types';
+import { checkCity } from '../../store/action';
+import { Actions } from '../../types/action';
+import { State } from '../../types/types';
 
 import Header from '../header/header';
-import HomeMap from '../home-map/home-map';
-import HomePlaces from '../home-places/home-places';
+import HomeTabs from '../home-tabs/home-tabs';
+import HomeEmpty from '../home-empty/home-empty';
+import HomeOffers from '../home-оffers/home-offers';
+
+const mapStateToProps = ({activeCity, offers}: State) => ({
+  activeCity,
+  offers,
+});
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+  checkCityHandler(evt: MouseEvent<HTMLElement>) {
+    dispatch(checkCity(evt.currentTarget.dataset.city));
+  },
+});
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = {
   authStatus: AuthStatus;
-  data: Item[];
 }
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & Props;
 
-function Home({authStatus, data}: Props): JSX.Element {
-  const [activeId, setActiveId] = useState<string | null>(null);
-
-  const activeIndex = 0;
-  const cities = new Set('');
-  data.forEach((item)=>{
-    cities.add(item.city.name);
-  });
-
-  const itemHoverHandler = (id: string | null) => {
-    setActiveId(id);
-  };
+function Home({authStatus, activeCity, offers, checkCityHandler}: ConnectedComponentProps): JSX.Element {
+  const hasOffers = offers.length > 0;
+  const emptyClassName = hasOffers ? '' : ' page__main--index-empty';
 
   return (
     <div className="page page--gray page--main">
       <Header authStatus={authStatus} />
-
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index${emptyClassName}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {[...cities].map((item, i) => {
-                const activeClassName = (i === activeIndex) ? ' tabs__item--active' : '';
-
-                return(
-                  <li key={item} className="locations__item">
-                    <a className={`locations__item-link tabs__item${activeClassName}`} href="#">
-                      <span>{item}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <HomePlaces itemHoverHandler={itemHoverHandler} data={data} />
-            <div className="cities__right-section">
-              <HomeMap
-                data={data}
-                activeId={activeId}
-              />
-            </div>
-          </div>
-        </div>
+        <HomeTabs activeCity={activeCity} checkCityHandler={checkCityHandler} />
+        {
+          hasOffers ? (
+            <HomeOffers data={offers} />
+          ) : (
+            <HomeEmpty />
+          )
+        }
       </main>
     </div>
   );
 }
 
-export default Home;
+export {Home};
+export default connector(Home);

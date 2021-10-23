@@ -19,9 +19,6 @@ function PropertyReviewsForm(): JSX.Element {
       method="post"
       onSubmit={(evt) => {
         evt.preventDefault();
-        /* eslint-disable */
-        console.log(textVal, sarstVal);
-        /* eslint-enable */
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>

@@ -22,7 +22,6 @@ function App({offers, reviews}: Props): JSX.Element {
         <Route exact path={AppRoute.Main}>
           <Home
             authStatus={authStatus}
-            data={offers}
           />
         </Route>
         <Route exact path={AppRoute.Property}>
