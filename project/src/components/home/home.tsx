@@ -1,63 +1,44 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthStatus } from '../../const';
-import { Item } from '../../types/types';
+import { setCity, filterOffers } from '../../store/action';
+import { State } from '../../types/types';
 
 import Header from '../header/header';
-import HomeMap from '../home-map/home-map';
-import HomePlaces from '../home-places/home-places';
+import HomeTabs from '../home-tabs/home-tabs';
+import HomeEmpty from '../home-empty/home-empty';
+import HomeOffers from '../home-оffers/home-offers';
 
 type Props = {
   authStatus: AuthStatus;
-  data: Item[];
 }
 
-function Home({authStatus, data}: Props): JSX.Element {
-  const [activeId, setActiveId] = useState<string | null>(null);
+function Home({authStatus}: Props): JSX.Element {
+  const dispatch = useDispatch();
+  const {activeCity, offerList, cityList} = useSelector((state: State) => state);
 
-  const activeIndex = 0;
-  const cities = new Set('');
-  data.forEach((item)=>{
-    cities.add(item.city.name);
-  });
-
-  const itemHoverHandler = (id: string | null) => {
-    setActiveId(id);
-  };
+  const hasOffers = offerList.length > 0;
+  const emptyClassName = hasOffers ? '' : ' page__main--index-empty';
 
   return (
     <div className="page page--gray page--main">
       <Header authStatus={authStatus} />
-
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index${emptyClassName}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {[...cities].map((item, i) => {
-                const activeClassName = (i === activeIndex) ? ' tabs__item--active' : '';
-
-                return(
-                  <li key={item} className="locations__item">
-                    <a className={`locations__item-link tabs__item${activeClassName}`} href="#">
-                      <span>{item}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <HomePlaces itemHoverHandler={itemHoverHandler} data={data} />
-            <div className="cities__right-section">
-              <HomeMap
-                data={data}
-                activeId={activeId}
-              />
-            </div>
-          </div>
-        </div>
+        <HomeTabs
+          activeCity={activeCity}
+          cityList={cityList}
+          setCityHandler={(evt) => {
+            dispatch(setCity(evt.currentTarget.dataset.city));
+            dispatch(filterOffers(evt.currentTarget.dataset.city));
+          }}
+        />
+        {
+          hasOffers ? (
+            <HomeOffers data={offerList} />
+          ) : (
+            <HomeEmpty />
+          )
+        }
       </main>
     </div>
   );

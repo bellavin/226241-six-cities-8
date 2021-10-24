@@ -52,3 +52,9 @@ export type Item = {
   isPremium: boolean,
   detail: ItemDetail,
 }
+
+export type State = {
+  activeCity: string | undefined,
+  offerList: Item[],
+  cityList: string[]
+};

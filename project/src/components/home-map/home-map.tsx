@@ -5,28 +5,25 @@ import useMap from '../../hooks/useMap';
 import { Item } from '../../types/types';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
-type Props = {
-  activeId: string | null;
-  data: Item[];
-};
-
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
-
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
+type Props = {
+  activeId: string | null;
+  data: Item[];
+};
 
 function HomeMap({activeId, data}: Props): JSX.Element {
-
   const mapRef = useRef(null);
-  const map = useMap(mapRef, data[2].city);
+  const map = useMap(mapRef, data[0].city);
 
   useEffect(() => {
     if (map) {
@@ -44,6 +41,12 @@ function HomeMap({activeId, data}: Props): JSX.Element {
           )
           .addTo(map);
       });
+
+      map.flyTo([data[0].city.lat, data[0].city.lng], 13);
+      map.scrollWheelZoom.disable();
+      return () => {
+        // marker.clearLayers();
+      };
     }
   }, [map, data, activeId]);
 
