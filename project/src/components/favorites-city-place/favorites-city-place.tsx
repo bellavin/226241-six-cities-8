@@ -1,9 +1,9 @@
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Item } from '../../types/types';
+import { Offer } from '../../types/types';
 
 type Props = {
-  data: Item;
+  data: Offer;
 }
 
 function FavoritesCityPlace({data}: Props): JSX.Element {
@@ -13,7 +13,7 @@ function FavoritesCityPlace({data}: Props): JSX.Element {
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
+        <Link to={{pathname: generatePath(AppRoute.Offer, {id})}}>
           <img className="place-card__image" src={data.img} width="150" height="110" alt="Place image" />
         </Link>
       </div>
@@ -37,7 +37,7 @@ function FavoritesCityPlace({data}: Props): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={{pathname: generatePath(AppRoute.Property, {id})}}>
+          <Link to={{pathname: generatePath(AppRoute.Offer, {id})}}>
             {data.name}
           </Link>
         </h2>

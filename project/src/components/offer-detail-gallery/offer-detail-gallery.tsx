@@ -2,7 +2,7 @@ type Props = {
   data: string[],
 }
 
-function Property({data}:Props): JSX.Element {
+function OfferDetailGallery({data}:Props): JSX.Element {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
@@ -19,4 +19,4 @@ function Property({data}:Props): JSX.Element {
   );
 }
 
-export default Property;
+export default OfferDetailGallery;

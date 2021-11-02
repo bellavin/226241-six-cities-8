@@ -1,12 +1,12 @@
 import Header from '../header/header';
 import FavoritesCity from '../favorites-city/favorites-city';
 import Footer from '../footer/footer';
-import { Item } from '../../types/types';
+import { Offer } from '../../types/types';
 import { AuthStatus } from '../../const';
 
 type Props = {
   authStatus: AuthStatus;
-  data: Item[];
+  data: Offer[];
 }
 
 function Favorites({authStatus, data}: Props): JSX.Element {

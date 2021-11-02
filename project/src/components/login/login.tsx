@@ -3,11 +3,11 @@ import { AppRoute, AuthStatus } from '../../const';
 
 import Header from '../header/header';
 
-type props = {
+type Props = {
   authStatus:AuthStatus,
 }
 
-function Login({authStatus}:props): JSX.Element {
+function Login({authStatus}: Props): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Header authStatus={authStatus} />
