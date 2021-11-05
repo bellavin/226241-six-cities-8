@@ -1,21 +1,20 @@
 import { Review } from '../../types/types';
-import { monthNames } from '../../const';
-import PropertyReviewsForm from '../property-reviews-form/property-reviews-form';
-
+import { MONTH_NAMES } from '../../const';
+import OfferDetailReviewsForm from '../offer-detail-reviews-form/offer-detail-reviews-form';
 
 type Props = {
   data: Review[],
 }
 
-function PropertyReviews({data}: Props): JSX.Element {
+function OfferDetailReviews({data}: Props): JSX.Element {
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{data.length}</span></h2>
       <ul className="reviews__list">
         {data.map((item) => {
           const dateInstance = new Date(item.date);
-          const month = monthNames[dateInstance.getMonth()];
+          const month = MONTH_NAMES[dateInstance.getMonth()];
           const year = dateInstance.getFullYear();
           const date = `${month} ${year}` ;
           const dateISO = dateInstance.toISOString().slice(0, 10);
@@ -47,9 +46,9 @@ function PropertyReviews({data}: Props): JSX.Element {
           );
         })}
       </ul>
-      <PropertyReviewsForm />
+      <OfferDetailReviewsForm />
     </section>
   );
 }
 
-export default PropertyReviews;
+export default OfferDetailReviews;

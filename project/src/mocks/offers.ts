@@ -1,6 +1,6 @@
-import { Item } from '../types/types';
+import { Offer } from '../types/types';
 
-export const offerList: Item[] = [
+export const offerList: Offer[] = [
   {
     id: '1',
     city: {

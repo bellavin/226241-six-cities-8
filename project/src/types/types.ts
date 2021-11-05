@@ -19,14 +19,7 @@ export type City = {
   zoom: number;
 };
 
-export type Point = {
-  title: string;
-  lat: number;
-  lng: number;
-};
-
-
-export type ItemDetail = {
+export type OfferDetail = {
   bedrooms: number,
   maxAdults: number,
   includes: string[],
@@ -34,7 +27,7 @@ export type ItemDetail = {
   description: string,
 }
 
-export type Item = {
+export type Offer = {
   id: string,
   city: City,
   location: {
@@ -50,11 +43,13 @@ export type Item = {
   type: string,
   isFeature: boolean,
   isPremium: boolean,
-  detail: ItemDetail,
+  detail: OfferDetail,
 }
 
 export type State = {
-  activeCity: string | undefined,
-  offerList: Item[],
-  cityList: string[]
+  sortOffersType: string,
+  filterOffersType: string,
+  offerList: Offer[] | [],
+  nearList: Offer[] | [],
+  reviewList: Review[] | [],
 };

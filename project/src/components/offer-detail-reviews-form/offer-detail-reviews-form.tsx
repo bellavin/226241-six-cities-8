@@ -8,7 +8,7 @@ const markList = [
   'terribly',
 ];
 
-function PropertyReviewsForm(): JSX.Element {
+function OfferDetailReviewsForm(): JSX.Element {
   /* eslint-disable */
   const [starsVal, setStarsVal] = useState(0);
   /* eslint-enable */
@@ -77,4 +77,4 @@ function PropertyReviewsForm(): JSX.Element {
   );
 }
 
-export default PropertyReviewsForm;
+export default OfferDetailReviewsForm;
