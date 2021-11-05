@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AuthStatus, AppRoute } from '../../const';
 
-type props = {
+type Props = {
   authStatus:AuthStatus,
 }
 
-function HeaderNav({authStatus}:props): JSX.Element {
+function HeaderNav({authStatus}: Props): JSX.Element {
   const isAuthorized = authStatus === AuthStatus.Auth;
   const notAuthorized = authStatus === AuthStatus.NoAuth;
 

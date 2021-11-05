@@ -1,22 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AuthStatus } from '../../const';
-import { setCity, filterOffers } from '../../store/action';
 import { State } from '../../types/types';
+import { getSortOffers } from '../../utils';
 
 import Header from '../header/header';
 import HomeTabs from '../home-tabs/home-tabs';
 import HomeEmpty from '../home-empty/home-empty';
-import HomeOffers from '../home-оffers/home-offers';
+import HomeInner from '../home-inner/home-inner';
+
 
 type Props = {
   authStatus: AuthStatus;
 }
 
 function Home({authStatus}: Props): JSX.Element {
-  const dispatch = useDispatch();
-  const {activeCity, offerList, cityList} = useSelector((state: State) => state);
+  const {offerList, filterOffersType, sortOffersType} = useSelector((state: State) => state);
 
-  const hasOffers = offerList.length > 0;
+  const filteredOffers = offerList.filter((item) => item.city.name === filterOffersType);
+  const sortedOffers = getSortOffers(filteredOffers, sortOffersType);
+  const hasOffers = filteredOffers.length > 0;
   const emptyClassName = hasOffers ? '' : ' page__main--index-empty';
 
   return (
@@ -24,17 +26,10 @@ function Home({authStatus}: Props): JSX.Element {
       <Header authStatus={authStatus} />
       <main className={`page__main page__main--index${emptyClassName}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <HomeTabs
-          activeCity={activeCity}
-          cityList={cityList}
-          setCityHandler={(evt) => {
-            dispatch(setCity(evt.currentTarget.dataset.city));
-            dispatch(filterOffers(evt.currentTarget.dataset.city));
-          }}
-        />
+        <HomeTabs />
         {
           hasOffers ? (
-            <HomeOffers data={offerList} />
+            <HomeInner data={sortedOffers} />
           ) : (
             <HomeEmpty />
           )

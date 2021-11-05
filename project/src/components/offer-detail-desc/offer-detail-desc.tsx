@@ -1,10 +1,10 @@
-import { Item } from '../../types/types';
+import { Offer } from '../../types/types';
 
 type Props = {
-  data: Item,
+  data: Offer,
 }
 
-function PropertyDesc({data}:Props): JSX.Element {
+function OfferDetailDesc({data}:Props): JSX.Element {
   const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
   const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
@@ -88,4 +88,4 @@ function PropertyDesc({data}:Props): JSX.Element {
   );
 }
 
-export default PropertyDesc;
+export default OfferDetailDesc;

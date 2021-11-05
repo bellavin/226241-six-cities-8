@@ -1,17 +1,17 @@
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Item, Review } from '../../types/types';
+import { Offer, Review } from '../../types/types';
 import { AppRoute, AuthStatus } from '../../const';
 
 import Home from '../home/home';
 import Login from '../login/login';
-import Property from '../property/property';
+import OfferDetail from '../offer-detail/offer-detail';
 import Favorites from '../favorites/favorites';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type Props = {
-  offerList: Item[];
+  offerList: Offer[];
   reviews: Review[];
 }
 
@@ -24,12 +24,9 @@ function App({offerList, reviews}: Props): JSX.Element {
             authStatus={authStatus}
           />
         </Route>
-        <Route exact path={AppRoute.Property}>
-          <Property
-            near={offerList}
+        <Route exact path={AppRoute.Offer}>
+          <OfferDetail
             authStatus={authStatus}
-            reviews={reviews}
-            data={offerList}
           />
         </Route>
         <Route exact path={AppRoute.Login}>

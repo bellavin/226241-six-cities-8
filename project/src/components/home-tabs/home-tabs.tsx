@@ -1,26 +1,28 @@
-import { MouseEventHandler } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterOffersAction, sortOffersAction} from '../../store/action';
+import { State } from '../../types/types';
+import { CITY_LIST, SORT_TYPES } from '../../const';
 
 
-type Props = {
-  activeCity: string | undefined;
-  cityList: string[],
-  setCityHandler: MouseEventHandler<HTMLAnchorElement>;
-}
-
-function HomeTabs({activeCity, cityList, setCityHandler}: Props): JSX.Element {
+function HomeTabs(): JSX.Element {
+  const dispatch = useDispatch();
+  const {filterOffersType} = useSelector((state: State) => state);
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cityList.map((item) => {
-            const activeClassName = (item === activeCity) ? ' tabs__item--active' : '';
+          {CITY_LIST.map((item) => {
+            const activeClassName = (item === filterOffersType) ? ' tabs__item--active' : '';
 
             return(
               <li key={item} className="locations__item">
                 <a
-                  onClick={setCityHandler}
-                  data-city={item}
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    dispatch(filterOffersAction(item));
+                    dispatch(sortOffersAction(SORT_TYPES[0]));
+                  }}
                   className={`locations__item-link tabs__item${activeClassName}`}
                   href="#"
                 >

@@ -3,11 +3,11 @@ import { AuthStatus, AppRoute } from '../../const';
 
 import HeaderNav from '../header-nav/header-nav';
 
-type props = {
+type Props = {
   authStatus:AuthStatus,
 }
 
-function Header({authStatus}:props): JSX.Element {
+function Header({authStatus}: Props): JSX.Element {
   return (
     <header className="header">
       <div className="container">

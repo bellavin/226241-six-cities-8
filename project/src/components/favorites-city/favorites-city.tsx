@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 import FavoritesCityPlace from '../favorites-city-place/favorites-city-place';
-import { Item } from '../../types/types';
+import { Offer } from '../../types/types';
 
 type Props = {
   data: {
     id: string;
     name: string;
-    places: Item[];
+    places: Offer[];
   };
 }
 
