@@ -1,5 +1,4 @@
-import { MouseEvent } from 'react';
-import { useHistory, useParams, generatePath } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import { Offer } from '../../types/types';
 import { AppRoute } from '../../const';
 
@@ -8,16 +7,8 @@ type Props = {
 }
 
 function OfferItem({data}: Props): JSX.Element {
-  const history = useHistory();
-  const params: {id: string} = useParams();
   const {id} = data;
-  const linkClickHanlder = (evt: MouseEvent<HTMLElement>) => {
-    evt.preventDefault();
-    history.push(generatePath(AppRoute.Offer, {id}));
-    if (params.id) {
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-  };
+
   const featureClassName = data.isFeature ? ' place-card__bookmark-button--active' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
 
@@ -34,9 +25,9 @@ function OfferItem({data}: Props): JSX.Element {
         )
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#" onClick={linkClickHanlder}>
+        <Link to={generatePath(AppRoute.Offer, {id})}>
           <img className="place-card__image" src={data.img} width="260" height="200" alt="Offer image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -58,9 +49,9 @@ function OfferItem({data}: Props): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick={linkClickHanlder}>
+          <Link to={generatePath(AppRoute.Offer, {id})}>
             {data.name}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{data.type}</p>
       </div>

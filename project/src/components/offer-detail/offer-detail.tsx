@@ -12,15 +12,10 @@ import OfferDetailNear from '../offer-detail-near/offer-detail-near';
 import Map from '../map/map';
 
 import { Offer } from '../../types/types';
-import { AuthStatus } from '../../const';
 
-type Props = {
-  authStatus: AuthStatus;
-}
-
-function OfferDetail({authStatus}: Props): JSX.Element {
+function OfferDetail(): JSX.Element {
   const params: {id: string} = useParams();
-  const {offerList, nearList, reviewList} = useSelector((state: State) => state);
+  const {offerList, nearList, reviewList, authStatus} = useSelector((state: State) => state);
   const data: Offer[] = offerList.filter((item) => item.id === params.id);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,13 +23,9 @@ function OfferDetail({authStatus}: Props): JSX.Element {
     dispatch(fetchReviewListAction(params.id));
   }, [params.id, dispatch]);
 
-  /* eslint-disable */
-  console.log(nearList)
-  /* eslint-enable */
-
   return (
     <div className="page">
-      <Header authStatus={authStatus} />
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -44,7 +35,7 @@ function OfferDetail({authStatus}: Props): JSX.Element {
               <OfferDetailDesc
                 data={data[0]}
               />
-              <OfferDetailReviews data={reviewList} />
+              <OfferDetailReviews authStatus={authStatus} data={reviewList} />
             </div>
           </div>
           <section className="property__map">

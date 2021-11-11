@@ -1,16 +1,11 @@
 import Header from '../header/header';
 import { Link } from 'react-router-dom';
-import { AuthStatus } from '../../const';
 
-type Props = {
-  authStatus:AuthStatus,
-}
-
-function NotFoundScreen({authStatus}:Props): JSX.Element {
+function NotFoundScreen(): JSX.Element {
   return (
     <div className="page page--gray">
       <main className="page__main">
-        <Header authStatus={authStatus} />
+        <Header />
 
         <div className="container">
           <h1>404. Page not found</h1>

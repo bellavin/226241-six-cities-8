@@ -1,3 +1,5 @@
+import { AuthStatus } from '../const';
+
 export type User = {
   img: string,
   name: string,
@@ -44,12 +46,20 @@ export type Offer = {
   isFeature: boolean,
   isPremium: boolean,
   detail: OfferDetail,
-}
+};
+
+export type AuthData = {
+  login: string;
+  password: string;
+};
 
 export type State = {
+  authStatus: AuthStatus,
+  isDataLoaded: boolean,
   sortOffersType: string,
   filterOffersType: string,
   offerList: Offer[] | [],
   nearList: Offer[] | [],
   reviewList: Review[] | [],
+  user: AuthData,
 };

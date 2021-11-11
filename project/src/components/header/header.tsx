@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { State } from '../../types/types';
 import { AuthStatus, AppRoute } from '../../const';
 
 import HeaderNav from '../header-nav/header-nav';
 
-type Props = {
-  authStatus:AuthStatus,
-}
+function Header(): JSX.Element {
+  const {authStatus} = useSelector((state: State) => state);
 
-function Header({authStatus}: Props): JSX.Element {
+
   return (
     <header className="header">
       <div className="container">

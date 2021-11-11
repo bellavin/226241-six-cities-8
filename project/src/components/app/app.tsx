@@ -1,7 +1,7 @@
-
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Offer, Review } from '../../types/types';
-import { AppRoute, AuthStatus } from '../../const';
+import { Router, Switch, Route } from 'react-router-dom';
+import { Offer } from '../../types/types';
+import { AppRoute } from '../../const';
+import browserHistory from '../../browser-history';
 
 import Home from '../home/home';
 import Login from '../login/login';
@@ -12,47 +12,35 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type Props = {
   offerList: Offer[];
-  reviews: Review[];
 }
 
-function App({offerList, reviews}: Props): JSX.Element {
+function App({offerList}: Props): JSX.Element {
+
   return (
-    <BrowserRouter>
+    <Router history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <Home
-            authStatus={authStatus}
-          />
+          <Home />
         </Route>
         <Route exact path={AppRoute.Offer}>
-          <OfferDetail
-            authStatus={authStatus}
-          />
+          <OfferDetail />
         </Route>
         <Route exact path={AppRoute.Login}>
-          <Login authStatus={authStatus} />
+          <Login />
         </Route>
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => (
-            <Favorites
-              authStatus={authStatus}
-              data={offerList}
-            />
+          render={({history}) => (
+            <Favorites data={offerList} />
           )}
-          authStatus={authStatus}
-        >
-        </PrivateRoute>
+        />
         <Route>
-          <NotFoundScreen authStatus={authStatus} />
+          <NotFoundScreen />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 
 export default App;
-
-
-const authStatus: AuthStatus = AuthStatus.Auth;

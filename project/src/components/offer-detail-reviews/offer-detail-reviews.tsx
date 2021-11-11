@@ -1,12 +1,14 @@
 import { Review } from '../../types/types';
-import { MONTH_NAMES } from '../../const';
+import { AuthStatus, MONTH_NAMES } from '../../const';
 import OfferDetailReviewsForm from '../offer-detail-reviews-form/offer-detail-reviews-form';
 
 type Props = {
-  data: Review[],
+  authStatus: AuthStatus;
+  data: Review[];
 }
 
-function OfferDetailReviews({data}: Props): JSX.Element {
+function OfferDetailReviews({authStatus, data}: Props): JSX.Element {
+  const isAuth = authStatus === AuthStatus.Auth;
 
   return (
     <section className="property__reviews reviews">
@@ -46,7 +48,10 @@ function OfferDetailReviews({data}: Props): JSX.Element {
           );
         })}
       </ul>
-      <OfferDetailReviewsForm />
+      {
+        isAuth &&
+        <OfferDetailReviewsForm />
+      }
     </section>
   );
 }

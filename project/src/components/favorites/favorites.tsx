@@ -2,14 +2,12 @@ import Header from '../header/header';
 import FavoritesCity from '../favorites-city/favorites-city';
 import Footer from '../footer/footer';
 import { Offer } from '../../types/types';
-import { AuthStatus } from '../../const';
 
 type Props = {
-  authStatus: AuthStatus;
   data: Offer[];
 }
 
-function Favorites({authStatus, data}: Props): JSX.Element {
+function Favorites({data}: Props): JSX.Element {
   const cityNames = new Set('');
   data.forEach((item)=>{
     cityNames.add(item.city.name);
@@ -25,7 +23,7 @@ function Favorites({authStatus, data}: Props): JSX.Element {
 
   return (
     <div className="page">
-      <Header authStatus={authStatus} />
+      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

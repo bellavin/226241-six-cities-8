@@ -12,3 +12,15 @@ export const getSortOffers = (data: Offer[], type: string) => {
       return data;
   }
 };
+
+const USER_DATA = 'user-data';
+export const getUserData = (): string => {
+  const data = localStorage.getItem(USER_DATA);
+  return data ?? '';
+};
+export const setUserData = (data: string): void => {
+  localStorage.setItem(USER_DATA, data);
+};
+export const removeUserData = (): void => {
+  localStorage.removeItem(USER_DATA);
+};

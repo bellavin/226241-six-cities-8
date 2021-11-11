@@ -1,5 +1,7 @@
 import { ActionType } from '../types/action';
 import { Offer, Review } from '../types/types';
+import { AuthStatus, AppRoute } from '../const';
+
 
 export const sortOffersAction = (sortOffersType: string) => ({
   type: ActionType.SortOffers,
@@ -34,4 +36,18 @@ export const loadReviewList = (reviewList: Review[]) => ({
   payload: {
     reviewList,
   },
+} as const);
+
+export const requireAuth = (authStatus: AuthStatus) => ({
+  type: ActionType.RequireAuth,
+  payload: authStatus,
+} as const);
+
+export const requireLogout = () => ({
+  type: ActionType.RequireLogout,
+} as const);
+
+export const redirectToRoute = (url: AppRoute) => ({
+  type: ActionType.RedirectToRoute,
+  payload: url,
 } as const);

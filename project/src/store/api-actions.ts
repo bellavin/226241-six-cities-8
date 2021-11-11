@@ -1,7 +1,10 @@
 import { ThunkActionResult } from '../types/action';
-import { loadOfferList, loadNearList, loadReviewList } from './action';
-import { Offer, Review } from '../types/types';
+import { AuthData } from '../types/types';
+import { loadOfferList, loadNearList, loadReviewList, redirectToRoute, requireAuth, requireLogout } from './action';
+import { saveToken, dropToken } from '../services/token';
 import { adaptOffer, adaptReview } from '../adapters';
+import { AuthStatus, AppRoute } from '../const';
+import { Offer, Review } from '../types/types';
 
 export enum APIRoute {
   offerList = '/hotels',
@@ -9,6 +12,28 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const checkAuthAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    await api.get(APIRoute.Login);
+    dispatch(requireAuth(AuthStatus.Auth));
+  };
+
+export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const {data: {token}} = await api.post<{token: string}>(APIRoute.Login, {email, password});
+    saveToken(token);
+    dispatch(requireAuth(AuthStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
+  };
+
+export const logoutAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    api.delete(APIRoute.Logout);
+    dropToken();
+    dispatch(requireLogout());
+    dispatch(requireAuth(AuthStatus.NoAuth));
+  };
 
 export const fetchOfferListAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
