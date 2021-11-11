@@ -1,6 +1,6 @@
 import { Router, Switch, Route } from 'react-router-dom';
 import { Offer } from '../../types/types';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import browserHistory from '../../browser-history';
 
 import Home from '../home/home';
@@ -25,13 +25,21 @@ function App({offerList}: Props): JSX.Element {
         <Route exact path={AppRoute.Offer}>
           <OfferDetail />
         </Route>
-        <Route exact path={AppRoute.Login}>
-          <Login />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.Login}
+          status={AuthStatus.NoAuth}
+          redirect={AppRoute.Main}
+          render={() => (
+            <Login />
+          )}
+        />
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={({history}) => (
+          status={AuthStatus.Auth}
+          redirect={AppRoute.Login}
+          render={() => (
             <Favorites data={offerList} />
           )}
         />

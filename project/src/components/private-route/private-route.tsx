@@ -12,6 +12,8 @@ type RenderFuncProps = {
 type Props = RouteProps & {
   render: (props: RenderFuncProps) => JSX.Element;
   authStatus: AuthStatus;
+  status: AuthStatus;
+  redirect: AppRoute;
 }
 
 const mapStateToProps = ({authStatus}: State) => ({
@@ -24,16 +26,16 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & Props;
 
 function PrivateRoute(props: ConnectedComponentProps): JSX.Element {
-  const {exact, path, render, authStatus} = props;
+  const {exact, path, render, authStatus, redirect, status} = props;
 
   return (
     <Route
       exact={exact}
       path={path}
       render={(routeProps) => (
-        authStatus === AuthStatus.Auth
+        authStatus === status
           ? render(routeProps)
-          : <Redirect to={AppRoute.Login} />
+          : <Redirect to={redirect} />
       )}
     />
   );
