@@ -1,11 +1,13 @@
 import { Offer } from '../../types/types';
 
 type Props = {
-  data: Offer,
+  clickHandler: () => void;
+  feature: boolean;
+  data: Offer;
 }
 
-function OfferDetailDesc({data}:Props): JSX.Element {
-  const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
+function OfferDetailDesc({clickHandler, feature, data}:Props): JSX.Element {
+  const featureClassName = feature ? ' property__bookmark-button--active' : '';
   const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
 
@@ -22,7 +24,11 @@ function OfferDetailDesc({data}:Props): JSX.Element {
         <h1 className="property__name">
           {data.name}
         </h1>
-        <button className={`property__bookmark-button button${featureClassName}`} type="button">
+        <button
+          className={`property__bookmark-button button${featureClassName}`}
+          type="button"
+          onClick={clickHandler}
+        >
           <svg className="property__bookmark-icon" width="31" height="33">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>

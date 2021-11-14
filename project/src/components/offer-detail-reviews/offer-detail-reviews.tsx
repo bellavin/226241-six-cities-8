@@ -5,9 +5,14 @@ import OfferDetailReviewsForm from '../offer-detail-reviews-form/offer-detail-re
 type Props = {
   authStatus: AuthStatus;
   data: Review[];
+  textVal: string;
+  starsVal: number;
+  setTextVal: React.Dispatch<React.SetStateAction<string>>;
+  setStarsVal: React.Dispatch<React.SetStateAction<number>>;
+  submitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
 }
 
-function OfferDetailReviews({authStatus, data}: Props): JSX.Element {
+function OfferDetailReviews({authStatus, data, textVal, starsVal, setTextVal, setStarsVal, submitHandler}: Props): JSX.Element {
   const isAuth = authStatus === AuthStatus.Auth;
 
   return (
@@ -50,7 +55,13 @@ function OfferDetailReviews({authStatus, data}: Props): JSX.Element {
       </ul>
       {
         isAuth &&
-        <OfferDetailReviewsForm />
+        <OfferDetailReviewsForm
+          textVal={textVal}
+          starsVal={starsVal}
+          setTextVal={setTextVal}
+          setStarsVal={setStarsVal}
+          submitHandler={submitHandler}
+        />
       }
     </section>
   );

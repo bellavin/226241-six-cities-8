@@ -6,14 +6,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer } from './store/reducer';
 import { requireAuth } from './store/action';
-import { fetchOfferListAction, checkAuthAction } from './store/api-actions';
+import { checkAuthAction, fetchOfferListAction } from './store/api-actions';
 import { redirect } from './store/middlewares/redirect';
 import { ThunkAppDispatch } from './types/action';
 import { createAPI } from './services/api';
 import { AuthStatus } from './const';
 import App from './components/app/app';
-
-import { offerList } from './mocks/offers';
 
 const api = createAPI(() => store.dispatch(requireAuth(AuthStatus.NoAuth)));
 
@@ -31,7 +29,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App offerList={offerList} />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

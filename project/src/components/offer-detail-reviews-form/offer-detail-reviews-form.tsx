@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const markList = [
+const MARK_LIST = [
   'perfect',
   'good',
   'not bad',
@@ -8,25 +8,26 @@ const markList = [
   'terribly',
 ];
 
-function OfferDetailReviewsForm(): JSX.Element {
-  /* eslint-disable */
-  const [starsVal, setStarsVal] = useState(0);
-  /* eslint-enable */
-  const [textVal, setTextVal] = useState('');
+type Props = {
+  textVal: string;
+  starsVal: number;
+  setTextVal: React.Dispatch<React.SetStateAction<string>>;
+  setStarsVal: React.Dispatch<React.SetStateAction<number>>;
+  submitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
+}
 
+function OfferDetailReviewsForm({textVal, starsVal, setTextVal, setStarsVal, submitHandler}: Props): JSX.Element {
   return (
     <form
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={(evt) => {
-        evt.preventDefault();
-      }}
+      onSubmit={submitHandler}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          markList.map((item, i, arr) => {
+          MARK_LIST.map((item, i, arr) => {
             const numOfStars = arr.length-i;
 
             return (
@@ -37,6 +38,8 @@ function OfferDetailReviewsForm(): JSX.Element {
                   value={numOfStars}
                   id={`${numOfStars}-stars`}
                   type="radio"
+                  checked={numOfStars === starsVal}
+                  required
                   onChange={(evt)=>{
                     setStarsVal(parseInt(evt.target.value, 10));
                   }}

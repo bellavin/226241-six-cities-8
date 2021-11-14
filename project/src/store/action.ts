@@ -24,6 +24,13 @@ export const loadOfferList = (offerList: Offer[]) => ({
   },
 } as const);
 
+export const loadOfferItem = (offerItem: Offer) => ({
+  type: ActionType.LoadOfferItem,
+  payload: {
+    offerItem,
+  },
+} as const);
+
 export const loadNearList = (nearList: Offer[]) => ({
   type: ActionType.LoadNearList,
   payload: {
@@ -35,6 +42,13 @@ export const loadReviewList = (reviewList: Review[]) => ({
   type: ActionType.LoadReviewList,
   payload: {
     reviewList,
+  },
+} as const);
+
+export const loadFavoriteList = (favoriteList: Offer[]) => ({
+  type: ActionType.LoadFavoriteList,
+  payload: {
+    favoriteList,
   },
 } as const);
 

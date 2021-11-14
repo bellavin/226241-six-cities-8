@@ -1,7 +1,7 @@
 import { Offer, Review } from './types/types';
 
-export const adaptOffer = (offerList: any[]): Offer[] => offerList.map((item) => {
-  const obj = {
+const getOffer = (item: any) => {
+  const offer = {
     id: item.id.toString() || '',
     city: {
       name: item.city.name || '',
@@ -36,12 +36,15 @@ export const adaptOffer = (offerList: any[]): Offer[] => offerList.map((item) =>
     },
   };
 
-  return obj;
-});
+  return offer;
+};
 
+export const adaptOfferItem = (item: any): Offer => getOffer(item);
+
+export const adaptOfferList = (offerList: any[]): Offer[] => offerList.map((item) => getOffer(item));
 
 export const adaptReview = (reviewList: any[]): Review[] => reviewList.map((item) => {
-  const obj = {
+  const review = {
     id: item.id,
     stars: item.rating,
     text: item.comment,
@@ -54,5 +57,5 @@ export const adaptReview = (reviewList: any[]): Review[] => reviewList.map((item
     },
   };
 
-  return obj;
+  return review;
 });

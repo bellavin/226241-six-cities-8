@@ -5,8 +5,10 @@ import {
   sortOffersAction,
   filterOffersAction,
   loadOfferList,
+  loadOfferItem,
   loadNearList,
   loadReviewList,
+  loadFavoriteList,
   redirectToRoute,
   requireAuth,
   requireLogout
@@ -16,8 +18,10 @@ export enum ActionType {
   SortOffers = 'main/sortOffers',
   FilterOffers = 'main/filterOffers',
   LoadOfferList = 'main/loadOfferList',
+  LoadOfferItem = 'detail/loadOfferItem',
   LoadNearList = 'detail/loadNearList',
   LoadReviewList = 'detail/loadReviewList',
+  LoadFavoriteList = 'favorite/loadFavoriteList',
   RequireAuth = 'user/requireAuth',
   RequireLogout = 'user/RequireLogout',
   RedirectToRoute = 'redirectToRoute'
@@ -27,8 +31,10 @@ export type Actions =
   | ReturnType<typeof sortOffersAction>
   | ReturnType<typeof filterOffersAction>
   | ReturnType<typeof loadOfferList>
+  | ReturnType<typeof loadOfferItem>
   | ReturnType<typeof loadNearList>
   | ReturnType<typeof loadReviewList>
+  | ReturnType<typeof loadFavoriteList>
   | ReturnType<typeof requireAuth>
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof redirectToRoute>;

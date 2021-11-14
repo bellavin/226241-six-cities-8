@@ -1,5 +1,4 @@
 import { Router, Switch, Route } from 'react-router-dom';
-import { Offer } from '../../types/types';
 import { AppRoute, AuthStatus } from '../../const';
 import browserHistory from '../../browser-history';
 
@@ -10,12 +9,7 @@ import Favorites from '../favorites/favorites';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-type Props = {
-  offerList: Offer[];
-}
-
-function App({offerList}: Props): JSX.Element {
-
+function App(): JSX.Element {
   return (
     <Router history={browserHistory}>
       <Switch>
@@ -25,6 +19,18 @@ function App({offerList}: Props): JSX.Element {
         <Route exact path={AppRoute.Offer}>
           <OfferDetail />
         </Route>
+        {/* <Route exact path={AppRoute.Favorites}>
+          <Favorites />
+        </Route> */}
+        <PrivateRoute
+          exact
+          path={AppRoute.Favorites}
+          status={AuthStatus.Auth}
+          redirect={AppRoute.Login}
+          render={() => (
+            <Favorites />
+          )}
+        />
         <PrivateRoute
           exact
           path={AppRoute.Login}
@@ -32,15 +38,6 @@ function App({offerList}: Props): JSX.Element {
           redirect={AppRoute.Main}
           render={() => (
             <Login />
-          )}
-        />
-        <PrivateRoute
-          exact
-          path={AppRoute.Favorites}
-          status={AuthStatus.Auth}
-          redirect={AppRoute.Login}
-          render={() => (
-            <Favorites data={offerList} />
           )}
         />
         <Route>

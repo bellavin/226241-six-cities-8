@@ -8,8 +8,10 @@ const initialState: State = {
   filterOffersType: CITY_LIST[0],
   sortOffersType: SORT_TYPES[0],
   offerList: [],
+  offerItem: null,
   nearList: [],
   reviewList: [],
+  favoriteList: [],
   user: {
     login: '',
     password: '',
@@ -33,6 +35,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
         ...state,
         offerList: action.payload.offerList,
       };
+    case ActionType.LoadOfferItem:
+      return {
+        ...state,
+        offerItem: action.payload.offerItem,
+      };
     case ActionType.LoadNearList:
       return {
         ...state,
@@ -42,6 +49,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         reviewList: action.payload.reviewList,
+      };
+    case ActionType.LoadFavoriteList:
+      return {
+        ...state,
+        favoriteList: action.payload.favoriteList,
       };
     case ActionType.RequireAuth:
       return {

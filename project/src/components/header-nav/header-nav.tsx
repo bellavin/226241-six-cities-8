@@ -11,7 +11,7 @@ type Props = {
 
 function HeaderNav({authStatus}: Props): JSX.Element {
   const isAuthorized = authStatus === AuthStatus.Auth;
-  const notAuthorized = authStatus === AuthStatus.NoAuth;
+  const isntAuthorized = authStatus === AuthStatus.NoAuth;
   const userData = getUserData();
   let name = '';
   if (userData) {
@@ -21,25 +21,16 @@ function HeaderNav({authStatus}: Props): JSX.Element {
 
   return (
     <nav className="header__nav">
-      <ul className="header__nav-list">
-        <li className="header__nav-item user">
-          <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-            <div className="header__avatar-wrapper user__avatar-wrapper">
-            </div>
-            {
-              isAuthorized && (
+      {
+        isAuthorized && (
+          <ul className="header__nav-list">
+            <li className="header__nav-item user">
+              <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
+                <div className="header__avatar-wrapper user__avatar-wrapper">
+                </div>
                 <span className="header__user-name user__name">{name}</span>
-              )
-            }
-            {
-              notAuthorized && (
-                <span className="header__login">Sign in</span>
-              )
-            }
-          </Link>
-        </li>
-        {
-          isAuthorized && (
+              </Link>
+            </li>
             <li className="header__nav-item">
               <Link
                 className="header__nav-link"
@@ -47,14 +38,26 @@ function HeaderNav({authStatus}: Props): JSX.Element {
                   dispatch(logoutAction());
                   removeUserData();
                 }}
-                to={AppRoute.Main}
+                to={AppRoute.Login}
               >
                 <span className="header__signout">Sign out</span>
               </Link>
             </li>
-          )
-        }
-      </ul>
+          </ul>
+        )
+      }
+      {
+        isntAuthorized && (
+          <ul className="header__nav-list">
+            <li className="header__nav-item user">
+              <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
+                <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                <span className="header__login">Sign in</span>
+              </Link>
+            </li>
+          </ul>
+        )
+      }
     </nav>
   );
 }

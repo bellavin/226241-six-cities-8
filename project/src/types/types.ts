@@ -53,13 +53,20 @@ export type AuthData = {
   password: string;
 };
 
+export type PostReview = {
+  comment: string;
+  rating: number;
+}
+
 export type State = {
   authStatus: AuthStatus,
   isDataLoaded: boolean,
   sortOffersType: string,
   filterOffersType: string,
+  offerItem: Offer | null,
   offerList: Offer[] | [],
   nearList: Offer[] | [],
   reviewList: Review[] | [],
+  favoriteList: Offer[] | [],
   user: AuthData,
 };

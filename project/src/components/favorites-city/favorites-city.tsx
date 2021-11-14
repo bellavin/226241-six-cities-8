@@ -13,7 +13,6 @@ type Props = {
 }
 
 function FavoritesCity({data}: Props): JSX.Element {
-
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
