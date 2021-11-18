@@ -2,7 +2,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { postFavoriteListAction } from '../../store/api-actions';
 import { Offer } from '../../types/types';
-import { AppRoute } from '../../const';
+import { AppRoute, FavoriteEventParam } from '../../const';
 
 type Props = {
   data: Offer;
@@ -32,7 +32,7 @@ function FavoritesCityPlace({data}: Props): JSX.Element {
             className={`place-card__bookmark-button button${featureClassName}`}
             type="button"
             onClick={() => {
-              dispatch(postFavoriteListAction(id, +(!data.isFeature)));
+              dispatch(postFavoriteListAction(id, data.isFeature, FavoriteEventParam.Favorites));
             }}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">

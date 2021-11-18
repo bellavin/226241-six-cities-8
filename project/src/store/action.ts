@@ -1,67 +1,83 @@
+import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { Offer, Review } from '../types/types';
 import { AuthStatus, AppRoute } from '../const';
 
+export const filterOffersAction = createAction(
+  ActionType.FilterOffers,
+  (filterOffersType: string) => ({
+    payload: {
+      filterOffersType,
+    },
+  })
+);
 
-export const sortOffersAction = (sortOffersType: string) => ({
-  type: ActionType.SortOffers,
-  payload: {
-    sortOffersType,
-  },
-} as const);
+export const sortOffersAction = createAction(
+  ActionType.SortOffers,
+  (sortOffersType: string) => ({
+    payload: {
+      sortOffersType,
+    },
+  })
+);
 
-export const filterOffersAction = (filterOffersType: string) => ({
-  type: ActionType.FilterOffers,
-  payload: {
-    filterOffersType,
-  },
-} as const);
+export const loadOfferList = createAction(
+  ActionType.LoadOfferList,
+  (offerList: Offer[]) => ({
+    payload: {
+      offerList,
+    },
+  })
+);
 
-export const loadOfferList = (offerList: Offer[]) => ({
-  type: ActionType.LoadOfferList,
-  payload: {
-    offerList,
-  },
-} as const);
+export const loadOfferItem = createAction(
+  ActionType.LoadOfferItem,
+  (offerItem: Offer) => ({
+    payload: {
+      offerItem,
+    },
+  })
+);
 
-export const loadOfferItem = (offerItem: Offer) => ({
-  type: ActionType.LoadOfferItem,
-  payload: {
-    offerItem,
-  },
-} as const);
+export const loadNearList = createAction(
+  ActionType.LoadNearList,
+  (nearList: Offer[]) => ({
+    payload: {
+      nearList,
+    },
+  })
+);
 
-export const loadNearList = (nearList: Offer[]) => ({
-  type: ActionType.LoadNearList,
-  payload: {
-    nearList,
-  },
-} as const);
+export const loadReviewList = createAction(
+  ActionType.LoadReviewList,
+  (reviewList: Review[]) => ({
+    payload: {
+      reviewList,
+    },
+  })
+);
 
-export const loadReviewList = (reviewList: Review[]) => ({
-  type: ActionType.LoadReviewList,
-  payload: {
-    reviewList,
-  },
-} as const);
+export const loadFavoriteList = createAction(
+  ActionType.LoadFavoriteList,
+  (favoriteList: Offer[]) => ({
+    payload: {
+      favoriteList,
+    },
+  })
+);
 
-export const loadFavoriteList = (favoriteList: Offer[]) => ({
-  type: ActionType.LoadFavoriteList,
-  payload: {
-    favoriteList,
-  },
-} as const);
+export const requireAuth = createAction(
+  ActionType.RequireAuth,
+  (authStatus: AuthStatus) => ({
+    payload: authStatus,
+  })
+);
 
-export const requireAuth = (authStatus: AuthStatus) => ({
-  type: ActionType.RequireAuth,
-  payload: authStatus,
-} as const);
+export const requireLogout = createAction(ActionType.RequireLogout);
 
-export const requireLogout = () => ({
-  type: ActionType.RequireLogout,
-} as const);
-
-export const redirectToRoute = (url: AppRoute) => ({
-  type: ActionType.RedirectToRoute,
-  payload: url,
-} as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute) => ({
+    payload: url,
+  })
+);

@@ -1,6 +1,9 @@
-import { useSelector } from 'react-redux';
 import { State } from '../../types/types';
 import { getSortOffers } from '../../utils';
+import { fetchOfferListAction, postFavoriteListAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FavoriteEventParam } from '../../const';
 
 import Header from '../header/header';
 import HomeTabs from '../home-tabs/home-tabs';
@@ -9,6 +12,11 @@ import HomeInner from '../home-inner/home-inner';
 
 function Home(): JSX.Element {
   const {offerList, filterOffersType, sortOffersType} = useSelector((state: State) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOfferListAction());
+  }, [dispatch]);
 
   const filteredOffers = offerList.filter((item) => item.city.name === filterOffersType);
   const sortedOffers = getSortOffers(filteredOffers, sortOffersType);

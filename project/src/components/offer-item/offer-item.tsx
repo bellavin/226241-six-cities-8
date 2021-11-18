@@ -2,19 +2,26 @@ import { Link, generatePath } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { postFavoriteListAction } from '../../store/api-actions';
 import { Offer } from '../../types/types';
-import { AppRoute } from '../../const';
+import { AppRoute, FavoriteEventParam } from '../../const';
+import { useLocation } from 'react-router-dom';
 
 type Props = {
   data: Offer;
 }
 
 function OfferItem({data}: Props): JSX.Element {
+  const location = useLocation();
+
   const {id} = data;
   const dispatch = useDispatch();
   const featureClassName = data.isFeature ? ' place-card__bookmark-button--active' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
   const clickHandler = () => {
-    dispatch(postFavoriteListAction(id, +(!data.isFeature)));
+    if (location.pathname === AppRoute.Main) {
+      dispatch(postFavoriteListAction(id, data.isFeature, FavoriteEventParam.Main));
+    } else {
+      dispatch(postFavoriteListAction(id, data.isFeature, FavoriteEventParam.Near));
+    }
   };
 
   return (

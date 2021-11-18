@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { State } from '../../types/types';
 import { fetchOfferItemAction, fetchNearListAction, fetchReviewListAction, postFavoriteListAction } from '../../store/api-actions';
 import { postReviewAction } from '../../store/api-actions';
+import { FavoriteEventParam } from '../../const';
 
 import Header from '../header/header';
 import OfferDetailGallery from '../offer-detail-gallery/offer-detail-gallery';
@@ -23,13 +24,11 @@ function OfferDetail(): JSX.Element {
     dispatch(fetchReviewListAction(params.id));
   }, [params.id, dispatch]);
 
-  const [feature, setFeature] = useState(isFeature);
   const [textVal, setTextVal] = useState('');
   const [starsVal, setStarsVal] = useState(0);
 
   const clickHandler = () => {
-    dispatch(postFavoriteListAction(params.id, +(!isFeature)));
-    setFeature(!feature);
+    dispatch(postFavoriteListAction(params.id, isFeature, FavoriteEventParam.Offer));
   };
 
   const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -55,7 +54,6 @@ function OfferDetail(): JSX.Element {
                 <div className="property__wrapper">
                   <OfferDetailDesc
                     clickHandler={clickHandler}
-                    feature={feature}
                     data={offerItem}
                   />
                   <OfferDetailReviews

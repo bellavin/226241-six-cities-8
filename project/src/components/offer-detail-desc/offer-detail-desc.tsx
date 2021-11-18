@@ -2,12 +2,11 @@ import { Offer } from '../../types/types';
 
 type Props = {
   clickHandler: () => void;
-  feature: boolean;
   data: Offer;
 }
 
-function OfferDetailDesc({clickHandler, feature, data}:Props): JSX.Element {
-  const featureClassName = feature ? ' property__bookmark-button--active' : '';
+function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
+  const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
   const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
 

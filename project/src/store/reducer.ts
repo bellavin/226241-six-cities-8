@@ -1,5 +1,15 @@
+import {createReducer} from '@reduxjs/toolkit';
 import { AuthStatus, CITY_LIST, SORT_TYPES } from '../const';
-import { ActionType, Actions } from '../types/action';
+import {
+  filterOffersAction,
+  sortOffersAction,
+  loadOfferList,
+  loadOfferItem,
+  loadNearList,
+  loadReviewList,
+  loadFavoriteList,
+  requireAuth
+} from './action';
 import { State } from '../types/types';
 
 const initialState: State = {
@@ -18,52 +28,40 @@ const initialState: State = {
   },
 };
 
-const reducer = (state: State = initialState, action: Actions): State => {
-  switch (action.type) {
-    case ActionType.FilterOffers:
-      return {
-        ...state,
-        filterOffersType: action.payload.filterOffersType,
-      };
-    case ActionType.SortOffers:
-      return {
-        ...state,
-        sortOffersType: action.payload.sortOffersType,
-      };
-    case ActionType.LoadOfferList:
-      return {
-        ...state,
-        offerList: action.payload.offerList,
-      };
-    case ActionType.LoadOfferItem:
-      return {
-        ...state,
-        offerItem: action.payload.offerItem,
-      };
-    case ActionType.LoadNearList:
-      return {
-        ...state,
-        nearList: action.payload.nearList,
-      };
-    case ActionType.LoadReviewList:
-      return {
-        ...state,
-        reviewList: action.payload.reviewList,
-      };
-    case ActionType.LoadFavoriteList:
-      return {
-        ...state,
-        favoriteList: action.payload.favoriteList,
-      };
-    case ActionType.RequireAuth:
-      return {
-        ...state,
-        authStatus: action.payload,
-        isDataLoaded: true,
-      };
-    default:
-      return state;
-  }
-};
+const reducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(filterOffersAction, (state, action) => {
+      const {filterOffersType} = action.payload;
+      state.filterOffersType = filterOffersType;
+    })
+    .addCase(sortOffersAction, (state, action) => {
+      const {sortOffersType} = action.payload;
+      state.sortOffersType = sortOffersType;
+    })
+    .addCase(loadOfferList, (state, action) => {
+      const {offerList} = action.payload;
+      state.offerList = offerList;
+    })
+    .addCase(loadOfferItem, (state, action) => {
+      const {offerItem} = action.payload;
+      state.offerItem = offerItem;
+    })
+    .addCase(loadNearList, (state, action) => {
+      const {nearList} = action.payload;
+      state.nearList = nearList;
+    })
+    .addCase(loadReviewList, (state, action) => {
+      const {reviewList} = action.payload;
+      state.reviewList = reviewList;
+    })
+    .addCase(loadFavoriteList, (state, action) => {
+      const {favoriteList} = action.payload;
+      state.favoriteList = favoriteList;
+    })
+    .addCase(requireAuth, (state, action) => {
+      state.authStatus = action.payload;
+      state.isDataLoaded = true;
+    })
+});
 
 export {reducer};

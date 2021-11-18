@@ -5,6 +5,13 @@ export enum AppRoute {
   Offer = '/offer/:id'
 }
 
+export enum FavoriteEventParam {
+  Main = 'main',
+  Favorites = 'favorites',
+  Offer = 'offer',
+  Near = 'near',
+}
+
 export enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

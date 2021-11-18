@@ -19,9 +19,6 @@ function App(): JSX.Element {
         <Route exact path={AppRoute.Offer}>
           <OfferDetail />
         </Route>
-        {/* <Route exact path={AppRoute.Favorites}>
-          <Favorites />
-        </Route> */}
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
