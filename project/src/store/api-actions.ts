@@ -77,31 +77,29 @@ export const fetchFavoriteListAction = (): ThunkActionResult =>
 export const postFavoriteListAction = (id: string, isFeature: boolean, page: FavoriteEventParam): ThunkActionResult =>
   async (dispatch, getState, api) => {
     const status = Number(!isFeature);
-    try {
-      await api.post(`${APIRoute.favoriteList}/${id}/${status}`);
-      const state = getState();
 
-      if (page === FavoriteEventParam.Favorites) {
-        const favoriteId = state.favoriteList.findIndex(item => item.id === id);
-        const newFavoriteList = [...state.favoriteList];
-        dispatch(loadFavoriteList([...newFavoriteList.slice(0, favoriteId), ...newFavoriteList.slice(favoriteId + 1)]));
-      }
+    await api.post(`${APIRoute.favoriteList}/${id}/${status}`);
+    const state = getState();
 
-      if (page === FavoriteEventParam.Main) {
-        const newOfferList = updateOfferList(id, !isFeature, state.offerList);
-        dispatch(loadOfferList(newOfferList));
-      }
+    if (page === FavoriteEventParam.Favorites) {
+      const favoriteId = state.favoriteList.findIndex((item) => item.id === id);
+      const newFavoriteList = [...state.favoriteList];
+      dispatch(loadFavoriteList([...newFavoriteList.slice(0, favoriteId), ...newFavoriteList.slice(favoriteId + 1)]));
+    }
 
-      if (page === FavoriteEventParam.Near) {
-        console.log(id, !isFeature, state.nearList)
-        const newNearList = updateOfferList(id, !isFeature, state.nearList);
-        dispatch(loadNearList(newNearList));
-      }
+    if (page === FavoriteEventParam.Main) {
+      const newOfferList = updateOfferList(id, !isFeature, state.offerList);
+      dispatch(loadOfferList(newOfferList));
+    }
 
-      if (page === FavoriteEventParam.Offer && state.offerItem !== null) {
-        const newOffer = {...state.offerItem};
-        newOffer.isFeature = !isFeature;
-        dispatch(loadOfferItem(newOffer));
-      }
-    } catch {}
+    if (page === FavoriteEventParam.Near) {
+      const newNearList = updateOfferList(id, !isFeature, state.nearList);
+      dispatch(loadNearList(newNearList));
+    }
+
+    if (page === FavoriteEventParam.Offer && state.offerItem !== null) {
+      const newOffer = {...state.offerItem};
+      newOffer.isFeature = !isFeature;
+      dispatch(loadOfferItem(newOffer));
+    }
   };

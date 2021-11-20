@@ -1,12 +1,12 @@
-import Header from '../header/header';
-import FavoritesCity from '../favorites-city/favorites-city';
-import FavoritesEmpty from '../favorites-empty/favorites-empty';
-import Footer from '../footer/footer';
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../types/types';
 import { fetchFavoriteListAction } from '../../store/api-actions';
+
+import Header from '../header/header';
+import FavoritesCity from '../favorites-city/favorites-city';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
+import Footer from '../footer/footer';
 
 
 function Favorites(): JSX.Element {

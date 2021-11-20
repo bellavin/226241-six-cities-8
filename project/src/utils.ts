@@ -26,11 +26,11 @@ export const removeUserData = (): void => {
 };
 
 export const updateOfferList = (offerId: string, isFeature: boolean, offerList: Offer[]) => {
-  const newOfferId = offerList.findIndex(item => item.id === offerId);
+  const newOfferId = offerList.findIndex((item) => item.id === offerId);
   const newOfferItem = [...offerList][newOfferId];
   const totalItem = {
     ...newOfferItem,
-    isFeature: isFeature
-  }
+    isFeature: isFeature,
+  };
   return [...offerList.slice(0, newOfferId), totalItem, ...offerList.slice(newOfferId + 1)];
-}
+};

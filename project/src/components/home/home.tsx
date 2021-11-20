@@ -1,9 +1,8 @@
 import { State } from '../../types/types';
 import { getSortOffers } from '../../utils';
-import { fetchOfferListAction, postFavoriteListAction } from '../../store/api-actions';
+import { fetchOfferListAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FavoriteEventParam } from '../../const';
 
 import Header from '../header/header';
 import HomeTabs from '../home-tabs/home-tabs';

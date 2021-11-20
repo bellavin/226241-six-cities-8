@@ -61,7 +61,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuth, (state, action) => {
       state.authStatus = action.payload;
       state.isDataLoaded = true;
-    })
+    });
 });
 
 export {reducer};

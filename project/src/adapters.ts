@@ -27,7 +27,6 @@ const getOffer = (item: any) => {
       maxAdults: item.max_adults,
       includes: item.goods,
       user: {
-        // id: item.host.id,
         img: item.host.avatar_url || '',
         name: item.host.name || '',
         isPro: item.host.is_pro || false,
@@ -50,7 +49,6 @@ export const adaptReview = (reviewList: any[]): Review[] => reviewList.map((item
     text: item.comment,
     date: item.date,
     user: {
-      // id: item.user.id
       img: item.user.avatar_url,
       name: item.user.name,
       isPro: item.user.is_pro,

@@ -9,7 +9,7 @@ export const filterOffersAction = createAction(
     payload: {
       filterOffersType,
     },
-  })
+  }),
 );
 
 export const sortOffersAction = createAction(
@@ -18,7 +18,7 @@ export const sortOffersAction = createAction(
     payload: {
       sortOffersType,
     },
-  })
+  }),
 );
 
 export const loadOfferList = createAction(
@@ -27,7 +27,7 @@ export const loadOfferList = createAction(
     payload: {
       offerList,
     },
-  })
+  }),
 );
 
 export const loadOfferItem = createAction(
@@ -36,7 +36,7 @@ export const loadOfferItem = createAction(
     payload: {
       offerItem,
     },
-  })
+  }),
 );
 
 export const loadNearList = createAction(
@@ -45,7 +45,7 @@ export const loadNearList = createAction(
     payload: {
       nearList,
     },
-  })
+  }),
 );
 
 export const loadReviewList = createAction(
@@ -54,7 +54,7 @@ export const loadReviewList = createAction(
     payload: {
       reviewList,
     },
-  })
+  }),
 );
 
 export const loadFavoriteList = createAction(
@@ -63,14 +63,14 @@ export const loadFavoriteList = createAction(
     payload: {
       favoriteList,
     },
-  })
+  }),
 );
 
 export const requireAuth = createAction(
   ActionType.RequireAuth,
   (authStatus: AuthStatus) => ({
     payload: authStatus,
-  })
+  }),
 );
 
 export const requireLogout = createAction(ActionType.RequireLogout);
@@ -79,5 +79,5 @@ export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
   (url: AppRoute) => ({
     payload: url,
-  })
+  }),
 );
