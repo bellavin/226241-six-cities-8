@@ -8,9 +8,9 @@ import { Offer, Review } from '../types/types';
 import { updateOfferList } from '../utils';
 
 export enum APIRoute {
-  offerList = '/hotels',
-  reviewList = '/comments',
-  favoriteList = '/favorite',
+  OfferList = '/hotels',
+  ReviewList = '/comments',
+  FavoriteList = '/favorite',
   Login = '/login',
   Logout = '/logout',
 }
@@ -39,38 +39,38 @@ export const logoutAction = (): ThunkActionResult =>
 
 export const fetchOfferListAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(APIRoute.offerList);
+    const {data} = await api.get<Offer[]>(APIRoute.OfferList);
     dispatch(loadOfferList(adaptOfferList(data)));
   };
 
 export const fetchOfferItemAction = (id: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer>(`${APIRoute.offerList}/${id}`);
+    const {data} = await api.get<Offer>(`${APIRoute.OfferList}/${id}`);
     dispatch(loadOfferItem(adaptOfferItem(data)));
   };
 
 export const fetchNearListAction = (id: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(`${APIRoute.offerList}/${id}/nearby`);
+    const {data} = await api.get<Offer[]>(`${APIRoute.OfferList}/${id}/nearby`);
     dispatch(loadNearList(adaptOfferList(data)));
   };
 
 export const fetchReviewListAction = (id: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Review[]>(`${APIRoute.reviewList}/${id}`);
+    const {data} = await api.get<Review[]>(`${APIRoute.ReviewList}/${id}`);
     dispatch(loadReviewList(adaptReview(data)));
   };
 
 export const postReviewAction = (id: string, {comment, rating}: PostReview): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    await api.post(`${APIRoute.reviewList}/${id}`, {comment, rating});
-    const {data} = await api.get<Review[]>(`${APIRoute.reviewList}/${id}`);
+    await api.post(`${APIRoute.ReviewList}/${id}`, {comment, rating});
+    const {data} = await api.get<Review[]>(`${APIRoute.ReviewList}/${id}`);
     dispatch(loadReviewList(adaptReview(data)));
   };
 
 export const fetchFavoriteListAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(APIRoute.favoriteList);
+    const {data} = await api.get<Offer[]>(APIRoute.FavoriteList);
     dispatch(loadFavoriteList(adaptOfferList(data)));
   };
 
@@ -78,7 +78,7 @@ export const postFavoriteListAction = (id: string, isFeature: boolean, page: Fav
   async (dispatch, getState, api) => {
     const status = Number(!isFeature);
 
-    await api.post(`${APIRoute.favoriteList}/${id}/${status}`);
+    await api.post(`${APIRoute.FavoriteList}/${id}/${status}`);
     const state = getState();
 
     if (page === FavoriteEventParam.Favorites) {
