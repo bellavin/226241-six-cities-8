@@ -13,17 +13,6 @@ export const getSortOffers = (data: Offer[], type: string) => {
   }
 };
 
-const USER_DATA = 'user-data';
-export const getUserData = (): string => {
-  const data = localStorage.getItem(USER_DATA);
-  return data ?? '';
-};
-export const setUserData = (data: string): void => {
-  localStorage.setItem(USER_DATA, data);
-};
-export const removeUserData = (): void => {
-  localStorage.removeItem(USER_DATA);
-};
 
 export const updateOfferList = (offerId: string, isFeature: boolean, offerList: Offer[]) => {
   const newOfferId = offerList.findIndex((item) => item.id === offerId);
@@ -34,3 +23,5 @@ export const updateOfferList = (offerId: string, isFeature: boolean, offerList: 
   };
   return [...offerList.slice(0, newOfferId), totalItem, ...offerList.slice(newOfferId + 1)];
 };
+
+export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);

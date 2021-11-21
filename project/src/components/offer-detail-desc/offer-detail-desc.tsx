@@ -1,4 +1,5 @@
 import { Offer } from '../../types/types';
+import { capitalizeFirstLetter } from '../../utils';
 
 type Props = {
   clickHandler: () => void;
@@ -9,6 +10,7 @@ function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
   const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
   const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
+  const type = capitalizeFirstLetter(data.type);
 
   return (
     <>
@@ -43,7 +45,7 @@ function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
       </div>
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          {data.type}
+          {type}
         </li>
         <li className="property__feature property__feature--bedrooms">
           {data.detail.bedrooms} Bedrooms

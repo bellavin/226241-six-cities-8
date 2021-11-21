@@ -1,4 +1,4 @@
-import { Offer, Review } from './types/types';
+import { Offer, Review, User } from './types/types';
 
 const getOffer = (item: any) => {
   const offer = {
@@ -57,3 +57,12 @@ export const adaptReview = (reviewList: any[]): Review[] => reviewList.map((item
 
   return review;
 });
+
+export const adaptUser = (item: any): User => {
+  const user = {
+    img: item.avatar_url,
+    name: item.name,
+    isPro: item.is_pro,
+  };
+  return user;
+};

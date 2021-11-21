@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { State } from '../../types/types';
 import { fetchOfferItemAction, fetchNearListAction, fetchReviewListAction, postFavoriteListAction } from '../../store/api-actions';
-import { postReviewAction } from '../../store/api-actions';
+import { reviewMessageAction ,reviewRatingAction  } from '../../store/action';
 import { FavoriteEventParam } from '../../const';
 
 import Header from '../header/header';
@@ -18,28 +18,28 @@ function OfferDetail(): JSX.Element {
   const {offerItem, nearList, reviewList, authStatus} = useSelector((state: State) => state);
   const dispatch = useDispatch();
   const isFeature = offerItem === null ? false : offerItem.isFeature;
+
   useEffect(() => {
     dispatch(fetchOfferItemAction(params.id));
     dispatch(fetchNearListAction(params.id));
     dispatch(fetchReviewListAction(params.id));
+    dispatch(reviewMessageAction(''));
+    dispatch(reviewRatingAction(0));
   }, [params.id, dispatch]);
-
-  const [textVal, setTextVal] = useState('');
-  const [starsVal, setStarsVal] = useState(0);
 
   const clickHandler = () => {
     dispatch(postFavoriteListAction(params.id, isFeature, FavoriteEventParam.Offer));
   };
 
-  const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(postReviewAction(params.id, {comment: textVal, rating: starsVal}));
-    setStarsVal(0);
-    setTextVal('');
-  };
-
   const hasOffer = offerItem !== null;
   const hasNears = nearList !== [];
+
+  let mapData = nearList;
+  let activeId = null;
+  if (hasOffer) {
+    mapData = [...nearList, offerItem];
+    activeId = offerItem.id;
+  }
 
   return (
     <div className="page">
@@ -59,18 +59,11 @@ function OfferDetail(): JSX.Element {
                   <OfferDetailReviews
                     authStatus={authStatus}
                     data={reviewList}
-                    textVal={textVal}
-                    starsVal={starsVal}
-                    setTextVal={setTextVal}
-                    setStarsVal={setStarsVal}
-                    submitHandler={submitHandler}
                   />
                 </div>
               </div>
               <section className="property__map">
-                {
-                  <Map city={offerItem.city} data={nearList} />
-                }
+                <Map city={offerItem.city} data={mapData} activeId={activeId} />
               </section>
             </section>
           )

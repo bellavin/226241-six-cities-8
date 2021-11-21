@@ -6,8 +6,7 @@ import { AuthStatus, AppRoute } from '../../const';
 import HeaderNav from '../header-nav/header-nav';
 
 function Header(): JSX.Element {
-  const {authStatus} = useSelector((state: State) => state);
-
+  const {authStatus, user} = useSelector((state: State) => state);
 
   return (
     <header className="header">
@@ -20,7 +19,7 @@ function Header(): JSX.Element {
           </div>
           {
             authStatus !== AuthStatus.Unknown && (
-              <HeaderNav authStatus={authStatus} />
+              <HeaderNav authStatus={authStatus} user={user} />
             )
           }
         </div>

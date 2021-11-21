@@ -10,10 +10,14 @@ export enum ActionType {
   LoadOfferItem = 'detail/loadOfferItem',
   LoadNearList = 'detail/loadNearList',
   LoadReviewList = 'detail/loadReviewList',
+  ReviewMessageAction = 'reviewMessageAction',
+  ReviewRatingAction = 'reviewRatingAction',
+  ReviewFormBlockingAction = 'reviewFormBlockingAction',
   LoadFavoriteList = 'favorite/loadFavoriteList',
   RequireAuth = 'user/requireAuth',
+  RequireLogin = 'user/RequireLogout',
   RequireLogout = 'user/RequireLogout',
-  RedirectToRoute = 'redirectToRoute'
+  RedirectToRoute = 'redirectToRoute',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

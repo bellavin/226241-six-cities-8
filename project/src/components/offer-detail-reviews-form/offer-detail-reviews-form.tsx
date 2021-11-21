@@ -1,4 +1,9 @@
 import React from 'react';
+import { State } from '../../types/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { postReviewAction } from '../../store/api-actions';
+import { reviewMessageAction, reviewRatingAction, reviewFormBlockingAction } from '../../store/action';
 
 const MARK_LIST = [
   'perfect',
@@ -8,15 +13,22 @@ const MARK_LIST = [
   'terribly',
 ];
 
-type Props = {
-  textVal: string;
-  starsVal: number;
-  setTextVal: React.Dispatch<React.SetStateAction<string>>;
-  setStarsVal: React.Dispatch<React.SetStateAction<number>>;
-  submitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
-}
+function OfferDetailReviewsForm(): JSX.Element {
+  const dispatch = useDispatch();
+  const params: {id: string} = useParams();
+  const {reviewMessage, reviewRating, reviewFormIsBlocked} = useSelector((state: State) => state);
 
-function OfferDetailReviewsForm({textVal, starsVal, setTextVal, setStarsVal, submitHandler}: Props): JSX.Element {
+  const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(postReviewAction(params.id, {comment: reviewMessage, rating: reviewRating}));
+    dispatch(reviewFormBlockingAction(true));
+  };
+
+  const tooShort = reviewMessage.length < 50;
+  const tooLong = reviewMessage.length >= 300;
+  const hasntStars = reviewRating === 0;
+  const isDisabled = tooShort || tooLong || hasntStars || reviewFormIsBlocked;
+
   return (
     <form
       className="reviews__form form"
@@ -38,10 +50,11 @@ function OfferDetailReviewsForm({textVal, starsVal, setTextVal, setStarsVal, sub
                   value={numOfStars}
                   id={`${numOfStars}-stars`}
                   type="radio"
-                  checked={numOfStars === starsVal}
+                  checked={numOfStars === reviewRating}
+                  disabled={reviewFormIsBlocked}
                   required
                   onChange={(evt)=>{
-                    setStarsVal(parseInt(evt.target.value, 10));
+                    dispatch(reviewRatingAction(parseInt(evt.target.value, 10)));
                   }}
                 />
                 <label htmlFor={`${numOfStars}-stars`} className="reviews__rating-label form__rating-label" title={item}>
@@ -57,11 +70,12 @@ function OfferDetailReviewsForm({textVal, starsVal, setTextVal, setStarsVal, sub
       <textarea
         className="reviews__textarea form__textarea"
         name="review"
-        value={textVal}
+        value={reviewMessage}
         id="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        disabled={reviewFormIsBlocked}
         onChange={(evt)=>{
-          setTextVal(evt.target.value);
+          dispatch(reviewMessageAction(evt.target.value));
         }}
       />
       <div className="reviews__button-wrapper">
@@ -71,7 +85,7 @@ function OfferDetailReviewsForm({textVal, starsVal, setTextVal, setStarsVal, sub
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={textVal.length < 50}
+          disabled={isDisabled}
         >
           Submit
         </button>

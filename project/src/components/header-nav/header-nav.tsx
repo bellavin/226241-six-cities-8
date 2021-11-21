@@ -1,21 +1,20 @@
 import { Link } from 'react-router-dom';
 import { AuthStatus, AppRoute } from '../../const';
-import { getUserData } from '../../utils';
+import { User } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/api-actions';
-import { removeUserData } from '../../utils';
 
 type Props = {
   authStatus: AuthStatus;
+  user: User;
 }
 
-function HeaderNav({authStatus}: Props): JSX.Element {
+function HeaderNav({authStatus, user}: Props): JSX.Element {
   const isAuthorized = authStatus === AuthStatus.Auth;
   const isntAuthorized = authStatus === AuthStatus.NoAuth;
-  const userData = getUserData();
-  let name = '';
-  if (userData) {
-    name = JSON.parse(getUserData()).login;
+  let hasImg = false;
+  if (user.img) {
+    hasImg = user.img !== '';
   }
   const dispatch = useDispatch();
 
@@ -27,8 +26,11 @@ function HeaderNav({authStatus}: Props): JSX.Element {
             <li className="header__nav-item user">
               <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                 <div className="header__avatar-wrapper user__avatar-wrapper">
+                  {hasImg && (
+                    <img className="user__avatar" src={user.img} alt="Юзерпик пользователя" />
+                  )}
                 </div>
-                <span className="header__user-name user__name">{name}</span>
+                <span className="header__user-name user__name">{user.name}</span>
               </Link>
             </li>
             <li className="header__nav-item">
@@ -36,7 +38,6 @@ function HeaderNav({authStatus}: Props): JSX.Element {
                 className="header__nav-link"
                 onClick={() => {
                   dispatch(logoutAction());
-                  removeUserData();
                 }}
                 to={AppRoute.Login}
               >

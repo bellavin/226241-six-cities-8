@@ -61,6 +61,9 @@ export type PostReview = {
 export type State = {
   authStatus: AuthStatus,
   isDataLoaded: boolean,
+  reviewMessage: string,
+  reviewRating: number,
+  reviewFormIsBlocked: boolean,
   sortOffersType: string,
   filterOffersType: string,
   offerItem: Offer | null,
@@ -68,5 +71,5 @@ export type State = {
   nearList: Offer[] | [],
   reviewList: Review[] | [],
   favoriteList: Offer[] | [],
-  user: AuthData,
+  user: User,
 };

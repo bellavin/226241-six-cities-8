@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
-import { Offer, Review } from '../types/types';
+import { Offer, Review, User } from '../types/types';
 import { AuthStatus, AppRoute } from '../const';
 
 export const filterOffersAction = createAction(
@@ -75,9 +75,37 @@ export const requireAuth = createAction(
 
 export const requireLogout = createAction(ActionType.RequireLogout);
 
+export const requireLogin = createAction(
+  ActionType.RequireLogin,
+  (user: User) => ({
+    payload: user,
+  }),
+);
+
 export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
   (url: AppRoute) => ({
     payload: url,
+  }),
+);
+
+export const reviewMessageAction = createAction(
+  ActionType.ReviewMessageAction,
+  (reviewMessage: string) => ({
+    payload: reviewMessage,
+  }),
+);
+
+export const reviewRatingAction = createAction(
+  ActionType.ReviewRatingAction,
+  (reviewRating: number) => ({
+    payload: reviewRating,
+  }),
+);
+
+export const reviewFormBlockingAction = createAction(
+  ActionType.ReviewFormBlockingAction,
+  (reviewFormIsBlocked: boolean) => ({
+    payload: reviewFormIsBlocked,
   }),
 );

@@ -2,7 +2,6 @@ import { useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppRoute } from '../../const';
-import { setUserData } from '../../utils';
 import { loginAction } from '../../store/api-actions';
 
 import Header from '../header/header';
@@ -17,7 +16,6 @@ function Login(): JSX.Element {
         password: passwordRef.current.value,
       };
       dispatch(loginAction(userData));
-      setUserData(JSON.stringify(userData));
     }
   };
 
