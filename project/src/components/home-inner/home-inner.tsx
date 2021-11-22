@@ -9,7 +9,7 @@ type Props = {
 
 function HomeInner({data}: Props): JSX.Element {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const itemHoverHandler = (id: string | null) => {
+  const handleItemHover = (id: string | null) => {
     setActiveId(id);
   };
 
@@ -18,7 +18,7 @@ function HomeInner({data}: Props): JSX.Element {
       <div className="cities__places-container container">
         <HomeOffers
           data={data}
-          itemHoverHandler={itemHoverHandler}
+          onItemHover={handleItemHover}
         />
         <div className="cities__right-section">
           <section className="cities__map">

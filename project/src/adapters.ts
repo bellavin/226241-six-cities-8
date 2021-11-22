@@ -1,4 +1,5 @@
 import { Offer, Review, User } from './types/types';
+import { capitalizeFirstLetter } from './utils';
 
 const getOffer = (item: any) => {
   const offer = {
@@ -19,7 +20,7 @@ const getOffer = (item: any) => {
     price: item.price,
     stars: item.rating,
     name: item.title || '',
-    type: item.type || '',
+    type: capitalizeFirstLetter(item.type) || '',
     isFeature: item.is_favorite || false,
     isPremium: item.is_premium || false,
     detail: {

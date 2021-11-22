@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppRoute } from '../../const';
 import { loginAction } from '../../store/api-actions';
+import { filterOffersAction } from '../../store/action';
+import { getRandomInt } from '../../utils';
+import { CITY_LIST } from '../../const';
 
 import Header from '../header/header';
 
 function Login(): JSX.Element {
   const dispatch = useDispatch();
-  const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
       const userData = {
@@ -18,6 +21,8 @@ function Login(): JSX.Element {
       dispatch(loginAction(userData));
     }
   };
+  const cityId = getRandomInt(0, CITY_LIST.length - 1);
+  const city = CITY_LIST[cityId];
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -34,7 +39,7 @@ function Login(): JSX.Element {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={submitHandler}
+              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -63,8 +68,12 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main}>
-                <span>Amsterdam</span>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.Main}
+                onClick={() => {dispatch(filterOffersAction(city));}}
+              >
+                <span>{city}</span>
               </Link>
             </div>
           </section>

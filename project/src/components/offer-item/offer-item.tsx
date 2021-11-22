@@ -16,7 +16,7 @@ function OfferItem({data}: Props): JSX.Element {
   const dispatch = useDispatch();
   const featureClassName = data.isFeature ? ' place-card__bookmark-button--active' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
-  const clickHandler = () => {
+  const handleClick = () => {
     if (location.pathname === AppRoute.Main) {
       dispatch(postFavoriteListAction(id, data.isFeature, FavoriteEventParam.Main));
     } else {
@@ -47,7 +47,7 @@ function OfferItem({data}: Props): JSX.Element {
           <button
             className={`place-card__bookmark-button button${featureClassName}`}
             type="button"
-            onClick={clickHandler}
+            onClick={handleClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

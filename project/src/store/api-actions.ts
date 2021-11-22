@@ -29,17 +29,13 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-const ERROR_MESSAGE = 'Что-то пошло не так, проверьте соединение с сетью';
+const ERROR_MESSAGE = 'Что-то пошло не так';
 
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    try {
-      const data = await api.get(APIRoute.Login);
-      dispatch(requireLogin(adaptUser(data.data)));
-      dispatch(requireAuth(AuthStatus.Auth));
-    } catch {
-      toast.info(ERROR_MESSAGE);
-    }
+    const data = await api.get(APIRoute.Login);
+    dispatch(requireLogin(adaptUser(data.data)));
+    dispatch(requireAuth(AuthStatus.Auth));
   };
 
 export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>
@@ -74,8 +70,12 @@ export const logoutAction = (): ThunkActionResult =>
 
 export const fetchOfferListAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(APIRoute.OfferList);
-    dispatch(loadOfferList(adaptOfferList(data)));
+    try {
+      const {data} = await api.get<Offer[]>(APIRoute.OfferList);
+      dispatch(loadOfferList(adaptOfferList(data)));
+    } catch {
+      toast.info(ERROR_MESSAGE);
+    }
   };
 
 export const fetchOfferItemAction = (id: string): ThunkActionResult =>

@@ -4,10 +4,10 @@ import HomeOffersSort from '../home-offers-sort/home-offers-sort';
 
 type Props = {
   data: Offer[];
-  itemHoverHandler: (id: string | null) => void;
+  onItemHover: (id: string | null) => void;
 }
 
-function HomeOffers({data, itemHoverHandler}: Props): JSX.Element {
+function HomeOffers({data, onItemHover}: Props): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -20,10 +20,10 @@ function HomeOffers({data, itemHoverHandler}: Props): JSX.Element {
             key={item.id}
             className="cities__place-card"
             onMouseEnter={() => {
-              itemHoverHandler(item.id);
+              onItemHover(item.id);
             }}
             onMouseLeave={() => {
-              itemHoverHandler(null);
+              onItemHover(null);
             }}
           >
             <OfferItem data={item} />

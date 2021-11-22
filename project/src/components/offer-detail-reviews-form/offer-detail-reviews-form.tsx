@@ -18,7 +18,7 @@ function OfferDetailReviewsForm(): JSX.Element {
   const params: {id: string} = useParams();
   const {reviewMessage, reviewRating, reviewFormIsBlocked} = useSelector((state: State) => state);
 
-  const submitHandler = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(postReviewAction(params.id, {comment: reviewMessage, rating: reviewRating}));
     dispatch(reviewFormBlockingAction(true));
@@ -34,7 +34,7 @@ function OfferDetailReviewsForm(): JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={submitHandler}
+      onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

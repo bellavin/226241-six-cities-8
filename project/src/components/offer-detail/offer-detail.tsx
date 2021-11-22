@@ -27,7 +27,7 @@ function OfferDetail(): JSX.Element {
     dispatch(reviewRatingAction(0));
   }, [params.id, dispatch]);
 
-  const clickHandler = () => {
+  const handleClick = () => {
     dispatch(postFavoriteListAction(params.id, isFeature, FavoriteEventParam.Offer));
   };
 
@@ -53,7 +53,7 @@ function OfferDetail(): JSX.Element {
               <div className="property__container container">
                 <div className="property__wrapper">
                   <OfferDetailDesc
-                    clickHandler={clickHandler}
+                    onFavoriteClick={handleClick}
                     data={offerItem}
                   />
                   <OfferDetailReviews

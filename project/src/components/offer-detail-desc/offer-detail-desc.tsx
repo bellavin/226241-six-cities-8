@@ -1,16 +1,14 @@
 import { Offer } from '../../types/types';
-import { capitalizeFirstLetter } from '../../utils';
 
 type Props = {
-  clickHandler: () => void;
+  onFavoriteClick: () => void;
   data: Offer;
 }
 
-function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
+function OfferDetailDesc({onFavoriteClick, data}:Props): JSX.Element {
   const featureClassName = data.isFeature ? ' property__bookmark-button--active' : '';
   const userProClassName = data.detail.user.isPro ? ' property__avatar-wrapper--pro' : '';
   const stars = `${Math.floor(data.stars) * 20}%`;
-  const type = capitalizeFirstLetter(data.type);
 
   return (
     <>
@@ -28,7 +26,7 @@ function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
         <button
           className={`property__bookmark-button button${featureClassName}`}
           type="button"
-          onClick={clickHandler}
+          onClick={onFavoriteClick}
         >
           <svg className="property__bookmark-icon" width="31" height="33">
             <use xlinkHref="#icon-bookmark"></use>
@@ -45,7 +43,7 @@ function OfferDetailDesc({clickHandler, data}:Props): JSX.Element {
       </div>
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          {type}
+          {data.type}
         </li>
         <li className="property__feature property__feature--bedrooms">
           {data.detail.bedrooms} Bedrooms

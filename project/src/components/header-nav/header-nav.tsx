@@ -12,10 +12,7 @@ type Props = {
 function HeaderNav({authStatus, user}: Props): JSX.Element {
   const isAuthorized = authStatus === AuthStatus.Auth;
   const isntAuthorized = authStatus === AuthStatus.NoAuth;
-  let hasImg = false;
-  if (user.img) {
-    hasImg = user.img !== '';
-  }
+  const hasImg = user?.img !== '';
   const dispatch = useDispatch();
 
   return (
@@ -27,10 +24,10 @@ function HeaderNav({authStatus, user}: Props): JSX.Element {
               <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                 <div className="header__avatar-wrapper user__avatar-wrapper">
                   {hasImg && (
-                    <img className="user__avatar" src={user.img} alt="Юзерпик пользователя" />
+                    <img className="user__avatar" src={user?.img} alt="Юзерпик пользователя" />
                   )}
                 </div>
-                <span className="header__user-name user__name">{user.name}</span>
+                <span className="header__user-name user__name">{user?.name}</span>
               </Link>
             </li>
             <li className="header__nav-item">
