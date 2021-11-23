@@ -5,20 +5,36 @@ import { AppRoute } from '../../const';
 import { loginAction } from '../../store/api-actions';
 import { filterOffersAction } from '../../store/action';
 import { getRandomInt } from '../../utils';
+import { setUserData } from '../../utils';
 import { CITY_LIST } from '../../const';
 
+import { toast } from 'react-toastify';
+import { validatePass, validateMail } from '../../utils';
 import Header from '../header/header';
 
 function Login(): JSX.Element {
   const dispatch = useDispatch();
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     if (loginRef.current !== null && passwordRef.current !== null) {
+      const passIsValid = validatePass(passwordRef.current.value);
+      const mailIsValid = validateMail(loginRef.current.value);
+      if (!passIsValid) {
+        toast.info('Пароль должен состоять минимум из одной буквы и цифры');
+      }
+      if (!mailIsValid) {
+        toast.info('Невалидный e-mail');
+      }
+      if (!mailIsValid || !passIsValid) {
+        return;
+      }
       const userData = {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       };
       dispatch(loginAction(userData));
+      setUserData(JSON.stringify(userData));
     }
   };
   const cityId = getRandomInt(0, CITY_LIST.length - 1);

@@ -13,7 +13,6 @@ export const getSortOffers = (data: Offer[], type: string) => {
   }
 };
 
-
 export const updateOfferList = (offerId: string, isFeature: boolean, offerList: Offer[]) => {
   const newOfferId = offerList.findIndex((item) => item.id === offerId);
   const newOfferItem = [...offerList][newOfferId];
@@ -30,4 +29,36 @@ export const getRandomInt = (min: number, max: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const USER_DATA = 'user-data';
+export const getUserData = (): string => {
+  const data = localStorage.getItem(USER_DATA);
+  return data ?? '';
+};
+export const setUserData = (data: string): void => {
+  localStorage.setItem(USER_DATA, data);
+};
+export const removeUserData = (): void => {
+  localStorage.removeItem(USER_DATA);
+};
+
+export const validatePass = (text: string) => {
+  const letters = /[A-Za-z]/g;
+  const hasLetters = text.match(letters);
+
+  const numbers = /[0-9]/g;
+  const hasNumbers = text.match(numbers);
+
+  const whiteSpace = /[\s]/g;
+  const hasNoWhiteSpace = !text.match(whiteSpace);
+
+  const isLong = text.length >= 2;
+
+  return hasLetters && hasNumbers && hasNoWhiteSpace && isLong;
+};
+
+export const validateMail = (email: string) => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 };

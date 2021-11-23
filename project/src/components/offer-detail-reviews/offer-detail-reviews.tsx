@@ -10,6 +10,7 @@ type Props = {
 function OfferDetailReviews({authStatus, data}: Props): JSX.Element {
   const isAuth = authStatus === AuthStatus.Auth;
   const length = data.length > 10 ? 10 : data.length;
+  const MAX_REVIEWS = 10;
 
   return (
     <section className="property__reviews reviews">
@@ -25,7 +26,7 @@ function OfferDetailReviews({authStatus, data}: Props): JSX.Element {
             }
             return -1;
           })
-          .slice(0, 10)
+          .slice(0, MAX_REVIEWS)
           .map((item) => {
             const dateInstance = new Date(item.date);
             const month = MONTH_NAMES[dateInstance.getMonth()];

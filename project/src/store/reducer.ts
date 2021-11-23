@@ -49,6 +49,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferList, (state, action) => {
       const {offerList} = action.payload;
       state.offerList = offerList;
+      state.isDataLoaded = true;
     })
     .addCase(loadOfferItem, (state, action) => {
       const {offerItem} = action.payload;
@@ -68,7 +69,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuth, (state, action) => {
       state.authStatus = action.payload;
-      state.isDataLoaded = true;
     })
     .addCase(requireLogin, (state, action) => {
       state.user = action.payload;

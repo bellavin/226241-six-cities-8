@@ -3,6 +3,7 @@ import { AuthStatus, AppRoute } from '../../const';
 import { User } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/api-actions';
+import { getUserData, removeUserData } from '../../utils';
 
 type Props = {
   authStatus: AuthStatus;
@@ -12,6 +13,11 @@ type Props = {
 function HeaderNav({authStatus, user}: Props): JSX.Element {
   const isAuthorized = authStatus === AuthStatus.Auth;
   const isntAuthorized = authStatus === AuthStatus.NoAuth;
+  const userData = getUserData();
+  let name = '';
+  if (userData) {
+    name = JSON.parse(getUserData()).login;
+  }
   const hasImg = user?.img !== '';
   const dispatch = useDispatch();
 
@@ -27,7 +33,7 @@ function HeaderNav({authStatus, user}: Props): JSX.Element {
                     <img className="user__avatar" src={user?.img} alt="Юзерпик пользователя" />
                   )}
                 </div>
-                <span className="header__user-name user__name">{user?.name}</span>
+                <span className="header__user-name user__name">{name}</span>
               </Link>
             </li>
             <li className="header__nav-item">
@@ -35,6 +41,7 @@ function HeaderNav({authStatus, user}: Props): JSX.Element {
                 className="header__nav-link"
                 onClick={() => {
                   dispatch(logoutAction());
+                  removeUserData();
                 }}
                 to={AppRoute.Login}
               >
